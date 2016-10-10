@@ -33,6 +33,7 @@ var MyApp = (function () {
 }());
 exports.MyApp = MyApp;
 ionic_angular_1.ionicBootstrap(MyApp);
+
 },{"./pages/home/home":3,"@angular/core":153,"ionic-angular":467,"ionic-native":494}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -47,20 +48,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var BuyProductPage = (function () {
-    function BuyProductPage(navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+    function BuyProductPage(popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+        this.popoverCtrl = popoverCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
         this.viewCtrl = viewCtrl;
         this.basket = [];
-        this.totalprice = 0;
-        this.product = [{ id: '1', productName: 'chair', price: '1500', desc: 'เก้าอี้', logo: 'images/chair.png' },
-            { id: '2', productName: 'book', price: '120', desc: 'หนังสือ', logo: 'images/book.png' },
-            { id: '3', productName: 'note book', price: '50', desc: 'สมุด', logo: 'images/notebook.png' },
-            { id: '4', productName: 'pen', price: '15', desc: 'ปากกา', logo: 'images/pen.png' },
-            { id: '5', productName: 'pencil', price: '10', desc: 'ดินสอ', logo: 'images/pencil.png' }];
+        this.totalPrice = 0;
+        this.selectedProduct = [];
+        this.product = [{ id: '1', productName: 'chair', price: 1500, desc: 'เก้าอี้', logo: 'images/book.png' },
+            { id: '2', productName: 'book', price: 120, desc: 'หนังสือ', logo: 'images/book.png' },
+            { id: '3', productName: 'note book', price: 50, desc: 'สมุด', logo: 'images/book.png' },
+            { id: '4', productName: 'pen', price: 15, desc: 'ปากกา', logo: 'images/book.png' },
+            { id: '5', productName: 'elaser', price: 25, desc: 'ยางลบ', logo: 'images/book.png' },
+            { id: '6', productName: 'pencil', price: 10, desc: 'ดินสอ', logo: 'images/book.png' }];
         this.companydetail = navParams.get('companydetail');
+        this.mySlideOptions = {
+            initialSlide: 0,
+            loop: false,
+            pager: true
+        };
     }
     BuyProductPage.prototype.deleteItem = function (item) {
         var _this = this;
@@ -82,11 +91,18 @@ var BuyProductPage = (function () {
                                 break;
                             }
                         }
+                        _this.updateTotalPrice();
                     }
                 }
             ]
         });
         confirm.present();
+    };
+    BuyProductPage.prototype.updateTotalPrice = function () {
+        this.totalPrice = 0;
+        for (var i = 0; i < this.basket.length; i++) {
+            this.totalPrice += this.basket[i].price * this.basket[i].qty;
+        }
     };
     BuyProductPage.prototype.arrayIndexOf = function (myArr, key) {
         var result = -1;
@@ -97,31 +113,53 @@ var BuyProductPage = (function () {
         return result;
     };
     BuyProductPage.prototype.itemSelected = function (item) {
-        console.log(this.arrayIndexOf(this.basket, item));
+        this.selectedProduct.push(item);
         if (this.arrayIndexOf(this.basket, item) != -1) {
             var selected = this.basket.filter(function (itm) {
                 return itm.id == item.id;
             })[0];
             selected.qty++;
-            selected.totalPrice = selected.price * selected.qty;
-            this.totalprice += selected.totalPrice;
+            selected.total = selected.price * selected.qty;
         }
         else {
             item.qty = 1;
-            item.totalPrice = item.price * item.qty;
-            this.totalprice += item.totalPrice;
+            item.total = item.price * item.qty;
             this.basket.push(item);
         }
+        // sum price
+        this.updateTotalPrice();
+    };
+    BuyProductPage.prototype.presentPopover = function (myEvent) {
+        var popover = this.popoverCtrl.create(PopoverPage);
+        popover.present({
+            ev: myEvent
+        });
     };
     BuyProductPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/buy-product/buy-product.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
+        __metadata('design:paramtypes', [ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
     ], BuyProductPage);
     return BuyProductPage;
 }());
 exports.BuyProductPage = BuyProductPage;
+var PopoverPage = (function () {
+    function PopoverPage(viewCtrl) {
+        this.viewCtrl = viewCtrl;
+    }
+    PopoverPage.prototype.close = function () {
+        this.viewCtrl.dismiss();
+    };
+    PopoverPage = __decorate([
+        core_1.Component({
+            template: "\n    <ion-list>\n      <ion-list-header>\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32</ion-list-header>\n      <ion-item (click)=\"close()\">\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E40\u0E02\u0E35\u0E22\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E2A\u0E33\u0E19\u0E31\u0E01\u0E07\u0E32\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E15\u0E01\u0E41\u0E15\u0E48\u0E07\u0E1A\u0E49\u0E32\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E44\u0E1F\u0E1F\u0E49\u0E32</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E15\u0E01\u0E41\u0E15\u0E48\u0E07\u0E2A\u0E27\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E02\u0E2D\u0E07\u0E43\u0E0A\u0E49\u0E17\u0E31\u0E48\u0E27\u0E44\u0E1B</ion-item>\n      <ion-item (click)=\"close()\">\u0E2B\u0E49\u0E2D\u0E07\u0E19\u0E2D\u0E19</ion-item>\n    </ion-list>\n  "
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.ViewController])
+    ], PopoverPage);
+    return PopoverPage;
+}());
+
 },{"@angular/core":153,"ionic-angular":467}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -156,6 +194,7 @@ var HomePage = (function () {
     return HomePage;
 }());
 exports.HomePage = HomePage;
+
 },{"../order/order":4,"../trading/trading":5,"@angular/core":153,"ionic-angular":467}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -194,6 +233,7 @@ var OrderPage = (function () {
     return OrderPage;
 }());
 exports.OrderPage = OrderPage;
+
 },{"@angular/core":153,"ionic-angular":467}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -228,7 +268,6 @@ var TradingPage = (function () {
         this.Trading.push({ name: Modelname });
     };
     TradingPage.prototype.TradingSelected = function (Trad) {
-        console.log(Trad);
         this.navCtrl.push(buy_product_1.BuyProductPage, { "companydetail": Trad });
     };
     TradingPage = __decorate([
@@ -240,6 +279,7 @@ var TradingPage = (function () {
     return TradingPage;
 }());
 exports.TradingPage = TradingPage;
+
 },{"../buy-product/buy-product":2,"@angular/core":153,"ionic-angular":467}],6:[function(require,module,exports){
 /**
  * @license

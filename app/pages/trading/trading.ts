@@ -14,25 +14,24 @@ import { BuyProductPage } from '../buy-product/buy-product';
 })
 export class TradingPage {
 
-  
-  Trading:any = [
-    {name:"เงินสด", icon:"images/money175x175.jpg", tel:"0124634855", address:"ร้านลุงแปะ"},
-    {name:"HomePro", icon:"images/Homepro175x175.png", tel:"023564789", address:" 99 หมู่ 6, ลำลูกกา, ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี, 12150"},
-    {name:"Big C", icon:"images/big-c175x175.png", tel:"027364842", address:": 10 หมู่ 12 ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี 12150"},
-    {name:"Lotus", icon:"images/Lotus175x175.png", tel:"023873453", address:" 20/68 หมู่ที่ 18 ต.คูคต อ.ลำลูกกา ปทุมธานี 12150"}    
+
+  Trading: any = [
+    { name: "เงินสด", icon: "images/money175x175.jpg", tel: "0124634855", address: "ร้านลุงแปะ" },
+    { name: "HomePro", icon: "images/Homepro175x175.png", tel: "023564789", address: " 99 หมู่ 6, ลำลูกกา, ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี, 12150" },
+    { name: "Big C", icon: "images/big-c175x175.png", tel: "027364842", address: ": 10 หมู่ 12 ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี 12150" },
+    { name: "Lotus", icon: "images/Lotus175x175.png", tel: "023873453", address: " 20/68 หมู่ที่ 18 ต.คูคต อ.ลำลูกกา ปทุมธานี 12150" }
   ]
 
   constructor(private navCtrl: NavController) {
 
   }
 
-  addname(Modelname){
-    this.Trading.push({name:Modelname});
+  addname(Modelname) {
+    this.Trading.push({ name: Modelname });
   }
 
-  TradingSelected(Trad){
-    console.log(Trad);
-this.navCtrl.push(BuyProductPage,{"companydetail":Trad});
+  TradingSelected(Trad) {
+    this.navCtrl.push(BuyProductPage, { "companydetail": Trad });
   }
 
 

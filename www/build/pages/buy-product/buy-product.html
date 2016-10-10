@@ -8,12 +8,9 @@
   <ion-navbar>
     <ion-title>ตะกร้าสินค้า</ion-title>
     <ion-buttons end>
-      <button color="royal">
-        <ion-icon name="search"></ion-icon>
-      </button>
-      <button color="royal" (click)="presentModal()">
-        <ion-icon name="ios-cart"></ion-icon>
-      </button>
+      <button ion-button (click)="presentPopover($event)">
+  <ion-icon name="more"></ion-icon>
+</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -23,42 +20,57 @@
   <ion-content-header>
     <ion-card>
       <ion-card-header>
-        ชื่อร้าน : {{companydetail.name}}
+        <b>ชื่อร้าน</b> : {{companydetail.name}}
       </ion-card-header>
       <ion-card-content>
-        ที่อยู่ : {{companydetail.address}} <br>
-        เบอร์โทร : {{companydetail.tel}}
+        <b>ที่อยู</b> : {{companydetail.address}} <br> <b>เบอร์โทร</b> : {{companydetail.tel}}
       </ion-card-content>
     </ion-card>
   </ion-content-header>
   <ion-grid>
     <ion-row>
+      <ion-col width-50 style="text-align:center"><h4>ตะกร้าสินค้า</h4></ion-col>
+      <ion-col width-50 style="text-align:center"><h4>รายการสินค้า</h4></ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col width-50>
-        <ion-item *ngFor="let item of basket">
-          <ion-thumbnail item-left>
-            <img src="{{item.logo}}">
-          </ion-thumbnail>
-          <h2>{{item.productName}}
-            <p>{{item.desc}}</p>
-          </h2>
-          <p>ราคาต่อชิ้น: <b>{{item.price}}</b> บาท</p>
-          <p>จำนวน: <b>{{item.qty}}</b> <span>ราคารวม: <b>{{item.totalPrice}}</b> บาท</span> </p>
-          <button clear item-right color="danger" (click)="deleteItem(item)">
+        <ion-slides [options]="mySlideOptions">
+          <ion-slide>
+            <ion-list>
+            <ion-card *ngFor="let item of basket">
+              <ion-item>
+                <ion-avatar item-left>
+                  <img src="{{item.logo}}" style="max-width: 4rem">
+                </ion-avatar>
+                <h2>{{item.productName}}</h2>
+                <p>{{item.desc}}</p>
+                <p>ราคาต่อชิ้น: <b>{{item.price}}</b> บาท</p>
+                <p>จำนวน: <b>{{item.qty}}</b> <span>ราคารวม: <b>{{item.total}}</b> บาท</span> </p>
+                <button clear item-right color="danger" (click)="deleteItem(item)">
           <ion-icon name="trash"></ion-icon> </button>
-        </ion-item>
-      </ion-col>
-      <ion-col center width-50>
-        <ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
-          <ion-col style="flex: 0 0 50%; max-width: 50%; text-align: center; padding: 0px;" *ngFor="let item of product">
-            <ion-card (click)="itemSelected(item)" style="padding:10px;">
-              <img src="{{item.logo}}" width="216" height="168">
-              <h2>{{item.productName}}</h2>
-              <p>{{item.desc}}</p>
-              <p>ราคา: <b>{{item.price}}</b> บาท</p>
+              </ion-item>
             </ion-card>
-
-          </ion-col>
-        </ion-row>
+            </ion-list>
+          </ion-slide>
+          <ion-slide>Slide 2</ion-slide>
+        </ion-slides>
+      </ion-col>
+      <ion-col width-50>
+        <ion-slides [options]="mySlideOptions">
+          <ion-slide>
+            <ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
+              <ion-col style="flex: 0 0 50%; max-width: 50%; text-align: center; padding: 0px;" *ngFor="let item of product">
+                <ion-card (click)="itemSelected(item)" style="padding:10px;">
+                  <img src="{{item.logo}}" style="max-width:4rem;max-height:4rem">
+                  <h2>{{item.productName}}</h2>
+                  <p>{{item.desc}}</p>
+                  <p>ราคา: <b>{{item.price}}</b> บาท</p>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+          <ion-slide>Slide 2</ion-slide>          
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -66,11 +78,11 @@
 
 <ion-footer>
   <ion-toolbar>
-    <p>ทั้งหมด <b>{{totalprice}}</b> บาท</p>
+    <p>ทั้งหมด <b>{{totalPrice}}</b> บาท</p>
     <ion-buttons end>
       <button color="royal">
         ยืนยันการสั่งซื้อ
-        <ion-icon name="send"></ion-icon>
+        <ion-icon name="checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
