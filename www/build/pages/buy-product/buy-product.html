@@ -35,9 +35,9 @@
     <ion-row>
       <ion-col width-50>
         <ion-slides [options]="mySlideOptions">
-          <ion-slide>
+          <ion-slide *ngFor="let box of boxs">
             <ion-list>
-            <ion-card *ngFor="let item of basket">
+            <ion-card *ngFor="let item of box.productPerPage">
               <ion-item>
                 <ion-avatar item-left>
                   <img src="{{item.logo}}" style="max-width: 4rem">
@@ -52,14 +52,13 @@
             </ion-card>
             </ion-list>
           </ion-slide>
-          <ion-slide>Slide 2</ion-slide>
         </ion-slides>
       </ion-col>
       <ion-col width-50>
         <ion-slides [options]="mySlideOptions">
-          <ion-slide>
+          <ion-slide *ngFor="let box of boxsProduct">
             <ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
-              <ion-col style="flex: 0 0 50%; max-width: 50%; text-align: center; padding: 0px;" *ngFor="let item of product">
+              <ion-col style="flex: 0 0 50%; max-width: 50%; text-align: center; padding: 0px;" *ngFor="let item of box.productPerPage">
                 <ion-card (click)="itemSelected(item)" style="padding:10px;">
                   <img src="{{item.logo}}" style="max-width:4rem;max-height:4rem">
                   <h2>{{item.productName}}</h2>
@@ -68,8 +67,7 @@
                 </ion-card>
               </ion-col>
             </ion-row>
-          </ion-slide>
-          <ion-slide>Slide 2</ion-slide>          
+          </ion-slide>         
         </ion-slides>
       </ion-col>
     </ion-row>

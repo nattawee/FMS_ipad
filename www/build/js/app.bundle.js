@@ -47,8 +47,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
 var BuyProductPage = (function () {
-    function BuyProductPage(popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+    function BuyProductPage(http, popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+        var _this = this;
+        this.http = http;
         this.popoverCtrl = popoverCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -58,18 +62,21 @@ var BuyProductPage = (function () {
         this.basket = [];
         this.totalPrice = 0;
         this.selectedProduct = [];
-        this.product = [{ id: '1', productName: 'chair', price: 1500, desc: 'เก้าอี้', logo: 'images/book.png' },
-            { id: '2', productName: 'book', price: 120, desc: 'หนังสือ', logo: 'images/book.png' },
-            { id: '3', productName: 'note book', price: 50, desc: 'สมุด', logo: 'images/book.png' },
-            { id: '4', productName: 'pen', price: 15, desc: 'ปากกา', logo: 'images/book.png' },
-            { id: '5', productName: 'elaser', price: 25, desc: 'ยางลบ', logo: 'images/book.png' },
-            { id: '6', productName: 'pencil', price: 10, desc: 'ดินสอ', logo: 'images/book.png' }];
+        this.boxs = [];
+        this.boxsProduct = [];
+        this.product = [];
         this.companydetail = navParams.get('companydetail');
         this.mySlideOptions = {
             initialSlide: 0,
             loop: false,
             pager: true
         };
+        this.http.get('https://pms-service.herokuapp.com/product').map(function (res) {
+            return res.json();
+        }).subscribe(function (data) {
+            _this.product = data;
+            _this.setProduct();
+        });
     }
     BuyProductPage.prototype.deleteItem = function (item) {
         var _this = this;
@@ -86,11 +93,12 @@ var BuyProductPage = (function () {
                     text: 'ตกลง',
                     handler: function () {
                         for (var i = 0; i < _this.basket.length; i++) {
-                            if (_this.basket[i].id == item.id) {
+                            if (_this.basket[i]._id == item._id) {
                                 _this.basket.splice(i, 1);
                                 break;
                             }
                         }
+                        _this.updatePageAndItem();
                         _this.updateTotalPrice();
                     }
                 }
@@ -104,10 +112,39 @@ var BuyProductPage = (function () {
             this.totalPrice += this.basket[i].price * this.basket[i].qty;
         }
     };
+    BuyProductPage.prototype.updatePageAndItem = function () {
+        this.boxs = [];
+        var perPage = 3;
+        var page = Math.ceil(this.basket.length / perPage);
+        var idx = 0;
+        for (var i = 0; i < page; i++) {
+            var item = { page: i, productPerPage: [] };
+            for (var j = 0; j < perPage; j++) {
+                if (this.basket[idx])
+                    item.productPerPage.push(this.basket[idx]);
+                idx++;
+            }
+            this.boxs.push(item);
+        }
+    };
+    BuyProductPage.prototype.setProduct = function () {
+        var perPage = 6;
+        var page = Math.ceil(this.product.length / perPage);
+        var idx = 0;
+        for (var i = 0; i < page; i++) {
+            var item = { page: i, productPerPage: [] };
+            for (var j = 0; j < perPage; j++) {
+                if (this.product[idx])
+                    item.productPerPage.push(this.product[idx]);
+                idx++;
+            }
+            this.boxsProduct.push(item);
+        }
+    };
     BuyProductPage.prototype.arrayIndexOf = function (myArr, key) {
         var result = -1;
         myArr.forEach(function (idx) {
-            if (idx.id == key.id)
+            if (idx._id == key._id)
                 result++;
         });
         return result;
@@ -116,7 +153,7 @@ var BuyProductPage = (function () {
         this.selectedProduct.push(item);
         if (this.arrayIndexOf(this.basket, item) != -1) {
             var selected = this.basket.filter(function (itm) {
-                return itm.id == item.id;
+                return itm._id == item._id;
             })[0];
             selected.qty++;
             selected.total = selected.price * selected.qty;
@@ -126,6 +163,8 @@ var BuyProductPage = (function () {
             item.total = item.price * item.qty;
             this.basket.push(item);
         }
+        // updatePageAndItem
+        this.updatePageAndItem();
         // sum price
         this.updateTotalPrice();
     };
@@ -139,7 +178,7 @@ var BuyProductPage = (function () {
         core_1.Component({
             templateUrl: 'build/pages/buy-product/buy-product.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
+        __metadata('design:paramtypes', [http_1.Http, ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
     ], BuyProductPage);
     return BuyProductPage;
 }());
@@ -160,7 +199,7 @@ var PopoverPage = (function () {
     return PopoverPage;
 }());
 
-},{"@angular/core":153,"ionic-angular":467}],3:[function(require,module,exports){
+},{"@angular/core":153,"@angular/http":280,"ionic-angular":467,"rxjs/add/operator/map":580}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1363,7 +1402,7 @@ var EventEmitter = (function (_super) {
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
 
-},{"./lang":23,"./promise":24,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],18:[function(require,module,exports){
+},{"./lang":23,"./promise":24,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],18:[function(require,module,exports){
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -10909,7 +10948,7 @@ var SimpleExpressionChecker = (function () {
 
 },{"../chars":79,"../facade/collection":91,"../facade/exceptions":93,"../facade/lang":94,"../interpolation_config":108,"./ast":86,"./lexer":87,"@angular/core":153}],89:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
-},{"./lang":94,"./promise":96,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],90:[function(require,module,exports){
+},{"./lang":94,"./promise":96,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],90:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
 },{"dup":18}],91:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
@@ -30048,7 +30087,7 @@ function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, 
 
 },{"../facade/collection":194,"../facade/lang":197,"../reflection/reflection":229,"./forward_ref":182,"./metadata":184,"./provider":186,"./provider_util":187,"./reflective_exceptions":188,"./reflective_key":190}],192:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
-},{"./lang":197,"./promise":199,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],193:[function(require,module,exports){
+},{"./lang":197,"./promise":199,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],193:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
 },{"dup":18}],194:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
@@ -39375,7 +39414,7 @@ exports.PatternValidator = PatternValidator;
 
 },{"../facade/lang":272,"../validators":278,"@angular/core":153}],267:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
-},{"./lang":272,"./promise":273,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],268:[function(require,module,exports){
+},{"./lang":272,"./promise":273,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],268:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
 },{"dup":18}],269:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
@@ -43328,7 +43367,7 @@ exports.bootstrapWorkerApp = bootstrapWorkerApp;
 
 },{"./core_private":300,"./src/facade/async":302,"./src/facade/lang":307,"./src/xhr/xhr_cache":309,"./src/xhr/xhr_impl":310,"@angular/common":6,"@angular/compiler":72,"@angular/core":153,"@angular/platform-browser":312}],302:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
-},{"./lang":307,"./promise":308,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],303:[function(require,module,exports){
+},{"./lang":307,"./promise":308,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],303:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
 },{"dup":18}],304:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
@@ -46164,7 +46203,7 @@ exports.WebAnimationsPlayer = WebAnimationsPlayer;
 
 },{"../facade/lang":343}],337:[function(require,module,exports){
 arguments[4][17][0].apply(exports,arguments)
-},{"./lang":343,"./promise":344,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":580,"rxjs/operator/toPromise":581}],338:[function(require,module,exports){
+},{"./lang":343,"./promise":344,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],338:[function(require,module,exports){
 arguments[4][18][0].apply(exports,arguments)
 },{"dup":18}],339:[function(require,module,exports){
 /**
@@ -94059,7 +94098,7 @@ var Observable = (function () {
 }());
 exports.Observable = Observable;
 
-},{"./symbol/observable":582,"./util/root":590,"./util/toSubscriber":592}],575:[function(require,module,exports){
+},{"./symbol/observable":584,"./util/root":592,"./util/toSubscriber":594}],575:[function(require,module,exports){
 "use strict";
 exports.empty = {
     isUnsubscribed: true,
@@ -94275,7 +94314,7 @@ var SubjectObservable = (function (_super) {
     return SubjectObservable;
 }(Observable_1.Observable));
 
-},{"./Observable":574,"./SubjectSubscription":577,"./Subscriber":578,"./Subscription":579,"./symbol/rxSubscriber":583,"./util/ObjectUnsubscribedError":584,"./util/throwError":591}],577:[function(require,module,exports){
+},{"./Observable":574,"./SubjectSubscription":577,"./Subscriber":578,"./Subscription":579,"./symbol/rxSubscriber":585,"./util/ObjectUnsubscribedError":586,"./util/throwError":593}],577:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94568,7 +94607,7 @@ var SafeSubscriber = (function (_super) {
     return SafeSubscriber;
 }(Subscriber));
 
-},{"./Observer":575,"./Subscription":579,"./symbol/rxSubscriber":583,"./util/isFunction":588}],579:[function(require,module,exports){
+},{"./Observer":575,"./Subscription":579,"./symbol/rxSubscriber":585,"./util/isFunction":590}],579:[function(require,module,exports){
 "use strict";
 var isArray_1 = require('./util/isArray');
 var isObject_1 = require('./util/isObject');
@@ -94719,7 +94758,13 @@ var Subscription = (function () {
 }());
 exports.Subscription = Subscription;
 
-},{"./util/UnsubscriptionError":585,"./util/errorObject":586,"./util/isArray":587,"./util/isFunction":588,"./util/isObject":589,"./util/tryCatch":593}],580:[function(require,module,exports){
+},{"./util/UnsubscriptionError":587,"./util/errorObject":588,"./util/isArray":589,"./util/isFunction":590,"./util/isObject":591,"./util/tryCatch":595}],580:[function(require,module,exports){
+"use strict";
+var Observable_1 = require('../../Observable');
+var map_1 = require('../../operator/map');
+Observable_1.Observable.prototype.map = map_1.map;
+
+},{"../../Observable":574,"../../operator/map":582}],581:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94825,7 +94870,94 @@ function dispatchError(arg) {
     }
 }
 
-},{"../Observable":574,"../util/root":590}],581:[function(require,module,exports){
+},{"../Observable":574,"../util/root":592}],582:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var Subscriber_1 = require('../Subscriber');
+/**
+ * Applies a given `project` function to each value emitted by the source
+ * Observable, and emits the resulting values as an Observable.
+ *
+ * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+ * it passes each source value through a transformation function to get
+ * corresponding output values.</span>
+ *
+ * <img src="./img/map.png" width="100%">
+ *
+ * Similar to the well known `Array.prototype.map` function, this operator
+ * applies a projection to each value and emits that projection in the output
+ * Observable.
+ *
+ * @example <caption>Map every every click to the clientX position of that click</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var positions = clicks.map(ev => ev.clientX);
+ * positions.subscribe(x => console.log(x));
+ *
+ * @see {@link mapTo}
+ * @see {@link pluck}
+ *
+ * @param {function(value: T, index: number): R} project The function to apply
+ * to each `value` emitted by the source Observable. The `index` parameter is
+ * the number `i` for the i-th emission that has happened since the
+ * subscription, starting from the number `0`.
+ * @param {any} [thisArg] An optional argument to define what `this` is in the
+ * `project` function.
+ * @return {Observable<R>} An Observable that emits the values from the source
+ * Observable transformed by the given `project` function.
+ * @method map
+ * @owner Observable
+ */
+function map(project, thisArg) {
+    if (typeof project !== 'function') {
+        throw new TypeError('argument is not a function. Are you looking for `mapTo()`?');
+    }
+    return this.lift(new MapOperator(project, thisArg));
+}
+exports.map = map;
+var MapOperator = (function () {
+    function MapOperator(project, thisArg) {
+        this.project = project;
+        this.thisArg = thisArg;
+    }
+    MapOperator.prototype.call = function (subscriber, source) {
+        return source._subscribe(new MapSubscriber(subscriber, this.project, this.thisArg));
+    };
+    return MapOperator;
+}());
+/**
+ * We need this JSDoc comment for affecting ESDoc.
+ * @ignore
+ * @extends {Ignored}
+ */
+var MapSubscriber = (function (_super) {
+    __extends(MapSubscriber, _super);
+    function MapSubscriber(destination, project, thisArg) {
+        _super.call(this, destination);
+        this.project = project;
+        this.count = 0;
+        this.thisArg = thisArg || this;
+    }
+    // NOTE: This looks unoptimized, but it's actually purposefully NOT
+    // using try/catch optimizations.
+    MapSubscriber.prototype._next = function (value) {
+        var result;
+        try {
+            result = this.project.call(this.thisArg, value, this.count++);
+        }
+        catch (err) {
+            this.destination.error(err);
+            return;
+        }
+        this.destination.next(result);
+    };
+    return MapSubscriber;
+}(Subscriber_1.Subscriber));
+
+},{"../Subscriber":578}],583:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 /**
@@ -94854,7 +94986,7 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
-},{"../util/root":590}],582:[function(require,module,exports){
+},{"../util/root":592}],584:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
@@ -94876,14 +95008,14 @@ else {
     exports.$$observable = '@@observable';
 }
 
-},{"../util/root":590}],583:[function(require,module,exports){
+},{"../util/root":592}],585:[function(require,module,exports){
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
 exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
     Symbol.for('rxSubscriber') : '@@rxSubscriber';
 
-},{"../util/root":590}],584:[function(require,module,exports){
+},{"../util/root":592}],586:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94909,7 +95041,7 @@ var ObjectUnsubscribedError = (function (_super) {
 }(Error));
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
 
-},{}],585:[function(require,module,exports){
+},{}],587:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94932,30 +95064,30 @@ var UnsubscriptionError = (function (_super) {
 }(Error));
 exports.UnsubscriptionError = UnsubscriptionError;
 
-},{}],586:[function(require,module,exports){
+},{}],588:[function(require,module,exports){
 "use strict";
 // typeof any so that it we don't have to cast when comparing a result to the error object
 exports.errorObject = { e: {} };
 
-},{}],587:[function(require,module,exports){
+},{}],589:[function(require,module,exports){
 "use strict";
 exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
 
-},{}],588:[function(require,module,exports){
+},{}],590:[function(require,module,exports){
 "use strict";
 function isFunction(x) {
     return typeof x === 'function';
 }
 exports.isFunction = isFunction;
 
-},{}],589:[function(require,module,exports){
+},{}],591:[function(require,module,exports){
 "use strict";
 function isObject(x) {
     return x != null && typeof x === 'object';
 }
 exports.isObject = isObject;
 
-},{}],590:[function(require,module,exports){
+},{}],592:[function(require,module,exports){
 (function (global){
 "use strict";
 var objectTypes = {
@@ -94977,12 +95109,12 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],591:[function(require,module,exports){
+},{}],593:[function(require,module,exports){
 "use strict";
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
-},{}],592:[function(require,module,exports){
+},{}],594:[function(require,module,exports){
 "use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
@@ -94999,7 +95131,7 @@ function toSubscriber(nextOrObserver, error, complete) {
 }
 exports.toSubscriber = toSubscriber;
 
-},{"../Subscriber":578,"../symbol/rxSubscriber":583}],593:[function(require,module,exports){
+},{"../Subscriber":578,"../symbol/rxSubscriber":585}],595:[function(require,module,exports){
 "use strict";
 var errorObject_1 = require('./errorObject');
 var tryCatchTarget;
@@ -95019,9 +95151,9 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
-},{"./errorObject":586}],594:[function(require,module,exports){
+},{"./errorObject":588}],596:[function(require,module,exports){
 
-},{}]},{},[1,594])
+},{}]},{},[1,596])
 
 
 //# sourceMappingURL=app.bundle.js.map
