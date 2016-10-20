@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { OrderPage } from '../order/order';
 import { TradingPage } from '../trading/trading';
+import { TaxInvoicePage } from '../tax-invoice/tax-invoice';
 @Component({
   templateUrl: 'build/pages/home/home.html'
 })
@@ -15,5 +16,8 @@ export class HomePage {
   }
   openTrading(){
     this.navCtrl.push(TradingPage);
+  }
+  openTaxinvoice(){
+    this.navCtrl.push(TaxInvoicePage);
   }
 }

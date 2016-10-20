@@ -5,15 +5,56 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>รายการสินค้า</ion-title>
+    <ion-title>
+      รายการสินค้า
+    </ion-title>
+    <!--<ion-toolbar color="primary">
+      <ion-searchbar (input)="getItems($event)"></ion-searchbar>
+    </ion-toolbar>-->
   </ion-navbar>
-
 </ion-header>
 
+<ion-content padding class="cards-bg">
+  <ion-card class="cards-list-demo">
+    <ion-card-header>
+      <h1>ประเภทสินค้า</h1>
+    </ion-card-header>
 
-<ion-content padding>
+    <ion-list>
+      <button ion-item (click)="openProductpage('เครื่องเขียน')">
+        <ion-icon name='color-palette' item-left style="color: #55acee"></ion-icon>
+        เครื่องเขียน
+      </button>
+
+      <button ion-item (click)="openProductpage('อุปกรณ์สำนักงาน')">
+        <ion-icon name='medical' item-left style="color: #ff4000"></ion-icon>
+        อุปกรณ์สำนักงาน
+      </button>
+
+      <button ion-item (click)="openProductpage('ตกแต่งบ้าน')">
+        <ion-icon name='home' item-left style="color: #00ff00"></ion-icon>
+        ตกแต่งบ้าน
+      </button>
+
+      <button ion-item (click)="openProductpage('อุปกรณ์ไฟฟ้า')">
+        <ion-icon name='flash' item-left style="color: #ffff00"></ion-icon>
+        อุปกรณ์ไฟฟ้า
+      </button>
+
+      <button ion-item (click)="openProductpage('อุปกรณ์ตกแต่งสวน')">
+        <ion-icon name='rose' item-left style="color: #007800"></ion-icon>
+        อุปกรณ์ตกแต่งสวน
+      </button>
+
+      <button ion-item (click)="openProductpage('ห้องนอน')">
+        <ion-icon name='planet' item-left style="color: #77a8a8"></ion-icon>
+        ห้องนอน
+      </button>
+
+    </ion-list>
+  </ion-card>
+
 
   <!--<ion-list inset>
     <ion-item *ngFor="let item of order">
@@ -27,13 +68,17 @@
     <ion-item></ion-item>
   </ion-list>-->
 
-  <ion-grid>
-  <ion-row center>
-    <ion-col width-50>ff</ion-col>
+  <!--<ion-grid>
 
-  <ion-col width-50>ff</ion-col>
-  
-  </ion-row>
-</ion-grid>
+    <ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
+      <ion-col style="flex: 0 0 33%; max-width: 33%; text-align: center; padding: 10px;" *ngFor="let item of product">
+        <ion-card style="padding:0px;"><img src="{{item.image}}" style="width:200px; height:180px">
+          <h1>{{item.name}}</h1>
+          <p>ราคา :{{item.price}}</p>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>-->
 
 </ion-content>
