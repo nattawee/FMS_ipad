@@ -1,0 +1,172 @@
+<!--
+  Generated template for the PaidVoucherOrderPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>Paid Voucher Order</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col width-50>
+				<ion-card>
+					<ion-col>
+						<ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
+							<ion-col style="flex: 0 0 70%; max-width: 70%; text-align: center; padding: 0px;">
+								<div style="text-align: left;"> ชื่อลูกค้า :
+									<div style="text-align: left;">{{paidvoucherdetail.Suplier.FullName}}</div>
+									<div style="text-align: left;">{{paidvoucherdetail.Suplier.Address}}</div>
+									<div style="text-align: left;">โทร : {{paidvoucherdetail.Suplier.TelNo}}</div>
+									<div style="text-align: left;">Email : {{paidvoucherdetail.Suplier.Email}}</div>
+								</div>
+							</ion-col>
+							<ion-col style="flex: 0 0 30%; max-width: 30%; text-align: center; padding: 0px;">
+								<div style="text-align: left;">เลขที่ :{{paidvoucherdetail.DocNo}}</div>
+								<div style="text-align: left;">วันที่ :{{paidvoucherdetail.DocDate | date :"dd/MM/yyyy"}}</div>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+					<ion-col>
+						<ion-row>
+							<ion-col style="flex: 0 0 55%; max-width: 55%; text-align: center; padding: 0px;">รายการ</ion-col>
+							<ion-col style="flex: 0 0 10%; max-width: 10%; text-align: center; padding: 0px;">จำนวน</ion-col>
+							<ion-col style="flex: 0 0 20%; max-width: 20%; text-align: center; padding: 0px;">ราคา / หน่วย</ion-col>
+							<ion-col style="flex: 0 0 15%; max-width: 15%; text-align: center; padding: 0px;">จำนวนเงิน</ion-col>
+						</ion-row>
+					</ion-col>
+					<ion-col *ngFor="let item of selectbasket">
+						<ion-row >
+							<ion-col style="flex: 0 0 55%; max-width: 55%; text-align: center; padding: 0px;">
+								<label>{{item.Name}}</label>
+							</ion-col>
+							<ion-col style="flex: 0 0 10%; max-width: 10%; text-align: center; padding: 0px;">
+								<label>{{item.Price}}</label>
+							</ion-col>
+							<ion-col style="flex: 0 0 20%; max-width: 20%; text-align: center; padding: 0px;">
+								<label>{{item.Price * item.PriceAmount}}</label>
+							</ion-col>
+							<ion-col style="flex: 0 0 15%; max-width: 15%; text-align: center; padding: 0px;">
+								<label>{{item.PriceTotal}}</label>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+					<ion-col>
+						<ion-row>
+							<ion-col style="flex: 0 0 55%; max-width: 55%; text-align: center; padding: 0px;">
+								
+							</ion-col>
+							<ion-col style="flex: 0 0 45%; max-width: 45%; text-align: center; padding: 0px;">
+								<ion-row>
+									<ion-col>
+										<ion-row>
+									<ion-col>
+										รวมเงิน 
+									</ion-col>
+									<ion-col>
+										฿ {{987654}}
+									</ion-col>
+								</ion-row>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col>
+										<ion-row>
+									<ion-col>
+										VAT (7.0%) 
+									</ion-col>
+									<ion-col>
+										฿ {{987654}}
+									</ion-col>
+								</ion-row>
+									</ion-col>
+								</ion-row>
+								<ion-row>
+									<ion-col>
+										<ion-row>
+									<ion-col>
+										รวมเงินสุทธิ 
+									</ion-col>
+									<ion-col>
+										฿ {{987654}}
+									</ion-col>
+								</ion-row>
+									</ion-col>
+								</ion-row>
+								
+
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-card>
+			</ion-col>
+
+			<!--/////////////////////////////แบ่งหน้า////////////////////////////////////////////-->
+
+			<ion-col width-50>
+				<ion-card>
+					<ion-card-content>
+						<ion-row>
+							<ion-col width-50 align="left">
+								<label>รวมทั้งหมด</label>
+							</ion-col>
+							<ion-col width-50 align="right">
+								<label>..</label>
+							</ion-col>
+						</ion-row>
+						<ion-row style="margin-top:20px;">
+							<ion-col width-33>
+								<button block (click)="TablePage()">พักการขาย</button>
+
+							</ion-col>
+							<ion-col width-33>
+								<button block ion-button color="dark">เตรียมสินค้า</button>
+							</ion-col>
+
+							<ion-col width-33>
+								<button block (click)="PaymentPage()">ชำระเงิน</button>
+							</ion-col>
+						</ion-row>
+						<!--product-->
+						<ion-row>
+							<ion-slides pager [options]="mySlideOptions" style="height:350px; margin-top:-40px;">
+								<ion-slide *ngFor="let page of box">
+									<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
+										<ion-col style="flex: 0 0 48%;  max-width: 48%; text-align: center; padding: 0; margin-left:8px;" *ngFor="let item of page.basket"
+											(click)="chooseProduct(item)">
+											<button block ion-button color="secondary">{{item.Name}}<br> {{item.PriceNotIncludeVat}}</button>
+										</ion-col>
+									</ion-row>
+								</ion-slide>
+
+							</ion-slides>
+						</ion-row>
+						<!--cate-->
+						<ion-row>
+							<ion-slides pager [options]="mySlideOptions" style="height:160px; margin-top:-50px;">
+								<ion-slide *ngFor="let page of boxcate">
+									<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
+										<ion-col style="flex: 0 0 32%;  max-width: 32%; text-align: center; padding: 0; margin-left:6px;" *ngFor="let cate of page.fillterCate"
+											(click)="chooseCate(cate)">
+											<button block ion-button color="secondary">{{cate}}</button>
+										</ion-col>
+									</ion-row>
+								</ion-slide>
+							</ion-slides>
+						</ion-row>
+						<button block (click)="TablePage()" ion-button color="danger" style="margin-top:-10px;">ยกเลิก</button>
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+
+		</ion-row>
+	</ion-grid>
+
+</ion-content>

@@ -68,7 +68,7 @@ export class BuyProductPage {
   updateTotalPrice() {
     this.totalPrice = 0;
     for (let i = 0; i < this.basket.length; i++) {
-      this.totalPrice += this.basket[i].price * this.basket[i].qty;
+      this.totalPrice += this.basket[i].Price * this.basket[i].qty;
     }
   }
 
@@ -120,10 +120,10 @@ export class BuyProductPage {
         return itm._id == item._id;
       })[0];
       selected.qty++;
-      selected.total = selected.price * selected.qty;
+      selected.total = selected.Price * selected.qty;
     } else {
       item.qty = 1;
-      item.total = item.price * item.qty;
+      item.total = item.Price * item.qty;
       this.basket.push(item);
     }
     // updatePageAndItem

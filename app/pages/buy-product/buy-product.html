@@ -42,9 +42,9 @@
                 <ion-avatar item-left>
                   <img src="{{item.logo}}" style="max-width: 4rem">
                 </ion-avatar>
-                <h2>{{item.productName}}</h2>
+                <h2>{{item.Name}}</h2>
                 <p>{{item.desc}}</p>
-                <p>ราคาต่อชิ้น: <b>{{item.price}}</b> บาท</p>
+                <p>ราคาต่อชิ้น: <b>{{item.Price}}</b> บาท</p>
                 <p>จำนวน: <b>{{item.qty}}</b> <span>ราคารวม: <b>{{item.total}}</b> บาท</span> </p>
                 <button clear item-right color="danger" (click)="deleteItem(item)">
           <ion-icon name="trash"></ion-icon> </button>
@@ -61,9 +61,9 @@
               <ion-col style="flex: 0 0 50%; max-width: 50%; text-align: center; padding: 0px;" *ngFor="let item of box.productPerPage">
                 <ion-card (click)="itemSelected(item)" style="padding:10px;">
                   <img src="{{item.logo}}" style="max-width:4rem;max-height:4rem">
-                  <h2>{{item.productName}}</h2>
+                  <h2>{{item.Name}}</h2>
                   <p>{{item.desc}}</p>
-                  <p>ราคา: <b>{{item.price}}</b> บาท</p>
+                  <p>ราคา: <b>{{item.Price}}</b> บาท</p>
                 </ion-card>
               </ion-col>
             </ion-row>
