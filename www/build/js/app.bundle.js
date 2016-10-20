@@ -1,4 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -13,7 +17,10 @@ var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var ionic_native_1 = require('ionic-native');
 var home_1 = require('./pages/home/home');
+<<<<<<< HEAD
 // import { PaidVoucherPage } from './pages/paid-voucher/paid-voucher';
+=======
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 var MyApp = (function () {
     function MyApp(platform) {
         this.platform = platform;
@@ -47,12 +54,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+<<<<<<< HEAD
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var BuyProductPage = (function () {
     function BuyProductPage(http, popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
         var _this = this;
         this.http = http;
+=======
+var BuyProductPage = (function () {
+    function BuyProductPage(popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
         this.popoverCtrl = popoverCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -62,21 +74,33 @@ var BuyProductPage = (function () {
         this.basket = [];
         this.totalPrice = 0;
         this.selectedProduct = [];
+<<<<<<< HEAD
         this.boxs = [];
         this.boxsProduct = [];
         this.product = [];
+=======
+        this.product = [{ id: '1', productName: 'chair', price: 1500, desc: 'เก้าอี้', logo: 'images/book.png' },
+            { id: '2', productName: 'book', price: 120, desc: 'หนังสือ', logo: 'images/book.png' },
+            { id: '3', productName: 'note book', price: 50, desc: 'สมุด', logo: 'images/book.png' },
+            { id: '4', productName: 'pen', price: 15, desc: 'ปากกา', logo: 'images/book.png' },
+            { id: '5', productName: 'elaser', price: 25, desc: 'ยางลบ', logo: 'images/book.png' },
+            { id: '6', productName: 'pencil', price: 10, desc: 'ดินสอ', logo: 'images/book.png' }];
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
         this.companydetail = navParams.get('companydetail');
         this.mySlideOptions = {
             initialSlide: 0,
             loop: false,
             pager: true
         };
+<<<<<<< HEAD
         this.http.get('https://pms-service.herokuapp.com/product').map(function (res) {
             return res.json();
         }).subscribe(function (data) {
             _this.product = data;
             _this.setProduct();
         });
+=======
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
     }
     BuyProductPage.prototype.deleteItem = function (item) {
         var _this = this;
@@ -93,12 +117,19 @@ var BuyProductPage = (function () {
                     text: 'ตกลง',
                     handler: function () {
                         for (var i = 0; i < _this.basket.length; i++) {
+<<<<<<< HEAD
                             if (_this.basket[i]._id == item._id) {
+=======
+                            if (_this.basket[i].id == item.id) {
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
                                 _this.basket.splice(i, 1);
                                 break;
                             }
                         }
+<<<<<<< HEAD
                         _this.updatePageAndItem();
+=======
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
                         _this.updateTotalPrice();
                     }
                 }
@@ -109,6 +140,7 @@ var BuyProductPage = (function () {
     BuyProductPage.prototype.updateTotalPrice = function () {
         this.totalPrice = 0;
         for (var i = 0; i < this.basket.length; i++) {
+<<<<<<< HEAD
             this.totalPrice += this.basket[i].Price * this.basket[i].qty;
         }
     };
@@ -139,12 +171,19 @@ var BuyProductPage = (function () {
                 idx++;
             }
             this.boxsProduct.push(item);
+=======
+            this.totalPrice += this.basket[i].price * this.basket[i].qty;
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
         }
     };
     BuyProductPage.prototype.arrayIndexOf = function (myArr, key) {
         var result = -1;
         myArr.forEach(function (idx) {
+<<<<<<< HEAD
             if (idx._id == key._id)
+=======
+            if (idx.id == key.id)
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
                 result++;
         });
         return result;
@@ -153,6 +192,7 @@ var BuyProductPage = (function () {
         this.selectedProduct.push(item);
         if (this.arrayIndexOf(this.basket, item) != -1) {
             var selected = this.basket.filter(function (itm) {
+<<<<<<< HEAD
                 return itm._id == item._id;
             })[0];
             selected.qty++;
@@ -165,6 +205,18 @@ var BuyProductPage = (function () {
         }
         // updatePageAndItem
         this.updatePageAndItem();
+=======
+                return itm.id == item.id;
+            })[0];
+            selected.qty++;
+            selected.total = selected.price * selected.qty;
+        }
+        else {
+            item.qty = 1;
+            item.total = item.price * item.qty;
+            this.basket.push(item);
+        }
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
         // sum price
         this.updateTotalPrice();
     };
@@ -178,7 +230,11 @@ var BuyProductPage = (function () {
         core_1.Component({
             templateUrl: 'build/pages/buy-product/buy-product.html',
         }), 
+<<<<<<< HEAD
         __metadata('design:paramtypes', [http_1.Http, ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
+=======
+        __metadata('design:paramtypes', [ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
     ], BuyProductPage);
     return BuyProductPage;
 }());
@@ -198,7 +254,11 @@ var PopoverPage = (function () {
     ], PopoverPage);
     return PopoverPage;
 }());
+<<<<<<< HEAD
 },{"@angular/core":155,"@angular/http":282,"ionic-angular":469,"rxjs/add/operator/map":582}],3:[function(require,module,exports){
+=======
+},{"@angular/core":155,"ionic-angular":469}],3:[function(require,module,exports){
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -213,7 +273,11 @@ var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var order_1 = require('../order/order');
 var trading_1 = require('../trading/trading');
+<<<<<<< HEAD
 var paid_voucher_1 = require('../paid-voucher/paid-voucher');
+=======
+var tax_invoice_1 = require('../tax-invoice/tax-invoice');
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 var HomePage = (function () {
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
@@ -224,8 +288,13 @@ var HomePage = (function () {
     HomePage.prototype.openTrading = function () {
         this.navCtrl.push(trading_1.TradingPage);
     };
+<<<<<<< HEAD
     HomePage.prototype.openPV = function () {
         this.navCtrl.push(paid_voucher_1.PaidVoucherPage);
+=======
+    HomePage.prototype.openTaxinvoice = function () {
+        this.navCtrl.push(tax_invoice_1.TaxInvoicePage);
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
     };
     HomePage = __decorate([
         core_1.Component({
@@ -236,7 +305,11 @@ var HomePage = (function () {
     return HomePage;
 }());
 exports.HomePage = HomePage;
+<<<<<<< HEAD
 },{"../order/order":4,"../paid-voucher/paid-voucher":6,"../trading/trading":7,"@angular/core":155,"ionic-angular":469}],4:[function(require,module,exports){
+=======
+},{"../order/order":4,"../tax-invoice/tax-invoice":6,"../trading/trading":7,"@angular/core":155,"ionic-angular":469}],4:[function(require,module,exports){
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -249,6 +322,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+<<<<<<< HEAD
+=======
+var product_page_1 = require('../product-page/product-page');
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 /*
   Generated class for the OrderPage page.
 
@@ -256,6 +333,7 @@ var ionic_angular_1 = require('ionic-angular');
   Ionic pages and navigation.
 */
 var OrderPage = (function () {
+<<<<<<< HEAD
     function OrderPage(navCtrl) {
         this.navCtrl = navCtrl;
         this.order = [{ orderNum: '1', createDate: '3/10/59', createBy: 'mos', listItem: 'pen', seller: 'homepro', payment: 'pay' },
@@ -265,6 +343,27 @@ var OrderPage = (function () {
             { orderNum: '5', createDate: '3/12/59', createBy: 'nong', listItem: 'note book', seller: 'bigc', payment: 'pay' }
         ];
     }
+=======
+    // product = [{ name: 'หนังสือ', price: '300', image: 'images/book.png'},
+    //             { name: 'หนังสือ', price: '350', image: 'images/chair.png'},
+    //             { name: 'หนังสือ', price: '400', image: 'images/pen.png'},
+    //             { name: 'หนังสือ', price: '200', image: 'images/pencil.png'},
+    //             { name: 'หนังสือ', price: '250', image: 'images/notebook.png'},
+    //             { name: 'หนังสือ', price: '1000', image: 'images/notebook.png'}
+    // ]
+    // order = [{ orderNum: '1', createDate: '3/10/59', createBy: 'mos', listItem: 'pen', seller: 'homepro', payment: 'pay' },
+    //   { orderNum: '2', createDate: '3/11/59', createBy: 'duke', listItem: 'teble', seller: 'homepro', payment: 'pay' },
+    //   { orderNum: '3', createDate: '3/12/59', createBy: 'nong', listItem: 'telephone', seller: 'itcenter', payment: 'pay' },
+    //   { orderNum: '4', createDate: '3/12/59', createBy: 'duke', listItem: 'mouse', seller: 'tesgo lotus', payment: 'pay' },
+    //   { orderNum: '5', createDate: '3/12/59', createBy: 'nong', listItem: 'note book', seller: 'bigc', payment: 'pay' }
+    // ]
+    function OrderPage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    OrderPage.prototype.openProductpage = function (typeName) {
+        this.navCtrl.push(product_page_1.ProductPagePage, { 'typeName': typeName });
+    };
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
     OrderPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/order/order.html',
@@ -274,7 +373,11 @@ var OrderPage = (function () {
     return OrderPage;
 }());
 exports.OrderPage = OrderPage;
+<<<<<<< HEAD
 },{"@angular/core":155,"ionic-angular":469}],5:[function(require,module,exports){
+=======
+},{"../product-page/product-page":5,"@angular/core":155,"ionic-angular":469}],5:[function(require,module,exports){
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -287,14 +390,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+<<<<<<< HEAD
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 /*
   Generated class for the PaidVoucherOrderPage page.
+=======
+/*
+  Generated class for the ProductPagePage page.
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+<<<<<<< HEAD
 var PaidVoucherOrderPage = (function () {
     function PaidVoucherOrderPage(navCtrl, navParams, http) {
         this.navCtrl = navCtrl;
@@ -370,6 +479,31 @@ var PaidVoucherOrderPage = (function () {
 }());
 exports.PaidVoucherOrderPage = PaidVoucherOrderPage;
 },{"@angular/core":155,"@angular/http":282,"ionic-angular":469,"rxjs/add/operator/map":582}],6:[function(require,module,exports){
+=======
+var ProductPagePage = (function () {
+    function ProductPagePage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.product = [{ productName: 'หนังสือ', price: '300', image: 'images/book.png', type: 'เครื่องเขียน' },
+            { productName: 'หนังสือ', price: '350', image: 'images/chair.png', type: 'เครื่องเขียน' },
+            { productName: 'หนังสือ', price: '400', image: 'images/pen.png', type: 'เครื่องเขียน' },
+            { productName: 'หนังสือ', price: '200', image: 'images/pencil.png', type: 'อุปกรณ์สำนักงาน' },
+            { productName: 'หนังสือ', price: '250', image: 'images/notebook.png', type: 'อุปกรณ์สำนักงาน' },
+            { productName: 'หนังสือ', price: '1000', image: 'images/notebook.png', type: 'อุปกรณ์สำนักงาน' }
+        ];
+        this.typeName = navParams.get('typeName');
+    }
+    ProductPagePage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/product-page/product-page.html',
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams])
+    ], ProductPagePage);
+    return ProductPagePage;
+}());
+exports.ProductPagePage = ProductPagePage;
+},{"@angular/core":155,"ionic-angular":469}],6:[function(require,module,exports){
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -382,15 +516,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
+<<<<<<< HEAD
 var paid_voucher_order_1 = require('../paid-voucher-order/paid-voucher-order');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 /*
   Generated class for the PaidVoucherPage page.
+=======
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+/*
+  Generated class for the TaxInvoicePage page.
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+<<<<<<< HEAD
 var PaidVoucherPage = (function () {
     function PaidVoucherPage(navCtrl, http) {
         var _this = this;
@@ -418,6 +560,80 @@ var PaidVoucherPage = (function () {
 }());
 exports.PaidVoucherPage = PaidVoucherPage;
 },{"../paid-voucher-order/paid-voucher-order":5,"@angular/core":155,"@angular/http":282,"ionic-angular":469,"rxjs/add/operator/map":582}],7:[function(require,module,exports){
+=======
+var TaxInvoicePage = (function () {
+    function TaxInvoicePage(navCtrl, http) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.http = http;
+        this.product = [];
+        this.fillterCate = [];
+        this.boxcate = [];
+        this.basket = [];
+        this.box = [];
+        this.http.get('https://pms-service.herokuapp.com/product').map(function (res) {
+            return res.json();
+        }).subscribe(function (data) {
+            console.dir(data);
+            _this.product = data;
+            console.log(_this.product);
+            var flags = [], output = [], l = _this.product.length, i;
+            for (i = 0; i < l; i++) {
+                if (flags[_this.product[i].Category])
+                    continue;
+                flags[_this.product[i].Category] = true;
+                output.push(_this.product[i].Category);
+                _this.fillterCate = output;
+                console.log(_this.fillterCate);
+            }
+            var productPerCate = 6;
+            var pageCate = Math.ceil(_this.fillterCate.length / productPerCate);
+            var ii2 = 0;
+            for (var i_1 = 0; i_1 < pageCate; i_1++) {
+                var pp = { pageCate: i_1, fillterCate: [] };
+                for (var j = 0; j < productPerCate; j++) {
+                    if (_this.fillterCate[ii2])
+                        pp.fillterCate.push(_this.fillterCate[ii2]);
+                    ii2++;
+                }
+                _this.boxcate.push(pp);
+            }
+            console.log(_this.boxcate);
+        });
+    }
+    TaxInvoicePage.prototype.chooseCate = function (cate) {
+        // console.log(this.orders.order); 
+        console.log(cate);
+        this.basket = this.product.filter(function (el) {
+            return (el.Category === cate);
+        });
+        console.log(this.basket);
+        this.box = [];
+        var productPerPage = 12;
+        var page = Math.ceil(this.basket.length / productPerPage);
+        var ii = 0;
+        for (var i = 0; i < page; i++) {
+            var pp = { page: i, basket: [] };
+            for (var j = 0; j < productPerPage; j++) {
+                if (this.basket[ii])
+                    pp.basket.push(this.basket[ii]);
+                ii++;
+            }
+            this.box.push(pp);
+        }
+        console.log(this.box);
+    };
+    TaxInvoicePage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/tax-invoice/tax-invoice.html',
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, http_1.Http])
+    ], TaxInvoicePage);
+    return TaxInvoicePage;
+}());
+exports.TaxInvoicePage = TaxInvoicePage;
+},{"@angular/core":155,"@angular/http":282,"ionic-angular":469,"rxjs/add/operator/map":582}],7:[function(require,module,exports){
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -463,6 +679,332 @@ var TradingPage = (function () {
 }());
 exports.TradingPage = TradingPage;
 },{"../buy-product/buy-product":2,"@angular/core":155,"ionic-angular":469}],8:[function(require,module,exports){
+<<<<<<< HEAD
+=======
+=======
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+var ionic_native_1 = require('ionic-native');
+var home_1 = require('./pages/home/home');
+var MyApp = (function () {
+    function MyApp(platform) {
+        this.platform = platform;
+        this.rootPage = home_1.HomePage;
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            ionic_native_1.StatusBar.styleDefault();
+        });
+    }
+    MyApp = __decorate([
+        core_1.Component({
+            template: '<ion-nav [root]="rootPage"></ion-nav>'
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.Platform])
+    ], MyApp);
+    return MyApp;
+}());
+exports.MyApp = MyApp;
+ionic_angular_1.ionicBootstrap(MyApp);
+
+},{"./pages/home/home":3,"@angular/core":153,"ionic-angular":467,"ionic-native":494}],2:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/map');
+var BuyProductPage = (function () {
+    function BuyProductPage(http, popoverCtrl, navCtrl, navParams, alertCtrl, modalCtrl, viewCtrl) {
+        var _this = this;
+        this.http = http;
+        this.popoverCtrl = popoverCtrl;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
+        this.viewCtrl = viewCtrl;
+        this.basket = [];
+        this.totalPrice = 0;
+        this.selectedProduct = [];
+        this.boxs = [];
+        this.boxsProduct = [];
+        this.product = [];
+        this.companydetail = navParams.get('companydetail');
+        this.mySlideOptions = {
+            initialSlide: 0,
+            loop: false,
+            pager: true
+        };
+        this.http.get('https://pms-service.herokuapp.com/product').map(function (res) {
+            return res.json();
+        }).subscribe(function (data) {
+            _this.product = data;
+            _this.setProduct();
+        });
+    }
+    BuyProductPage.prototype.deleteItem = function (item) {
+        var _this = this;
+        var confirm = this.alertCtrl.create({
+            title: 'ยืนยันการลบสินค้า',
+            message: "\u0E04\u0E38\u0E13\u0E15\u0E49\u0E2D\u0E07\u0E01\u0E32\u0E23\u0E25\u0E1A " + item.productName + " \u0E2D\u0E2D\u0E01\u0E08\u0E32\u0E01\u0E15\u0E30\u0E01\u0E23\u0E49\u0E32\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E43\u0E0A\u0E48\u0E2B\u0E23\u0E37\u0E2D\u0E44\u0E21\u0E48",
+            buttons: [
+                {
+                    text: 'ยกเลิก',
+                    handler: function () {
+                    }
+                },
+                {
+                    text: 'ตกลง',
+                    handler: function () {
+                        for (var i = 0; i < _this.basket.length; i++) {
+                            if (_this.basket[i]._id == item._id) {
+                                _this.basket.splice(i, 1);
+                                break;
+                            }
+                        }
+                        _this.updatePageAndItem();
+                        _this.updateTotalPrice();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    BuyProductPage.prototype.updateTotalPrice = function () {
+        this.totalPrice = 0;
+        for (var i = 0; i < this.basket.length; i++) {
+            this.totalPrice += this.basket[i].price * this.basket[i].qty;
+        }
+    };
+    BuyProductPage.prototype.updatePageAndItem = function () {
+        this.boxs = [];
+        var perPage = 3;
+        var page = Math.ceil(this.basket.length / perPage);
+        var idx = 0;
+        for (var i = 0; i < page; i++) {
+            var item = { page: i, productPerPage: [] };
+            for (var j = 0; j < perPage; j++) {
+                if (this.basket[idx])
+                    item.productPerPage.push(this.basket[idx]);
+                idx++;
+            }
+            this.boxs.push(item);
+        }
+    };
+    BuyProductPage.prototype.setProduct = function () {
+        var perPage = 6;
+        var page = Math.ceil(this.product.length / perPage);
+        var idx = 0;
+        for (var i = 0; i < page; i++) {
+            var item = { page: i, productPerPage: [] };
+            for (var j = 0; j < perPage; j++) {
+                if (this.product[idx])
+                    item.productPerPage.push(this.product[idx]);
+                idx++;
+            }
+            this.boxsProduct.push(item);
+        }
+    };
+    BuyProductPage.prototype.arrayIndexOf = function (myArr, key) {
+        var result = -1;
+        myArr.forEach(function (idx) {
+            if (idx._id == key._id)
+                result++;
+        });
+        return result;
+    };
+    BuyProductPage.prototype.itemSelected = function (item) {
+        this.selectedProduct.push(item);
+        if (this.arrayIndexOf(this.basket, item) != -1) {
+            var selected = this.basket.filter(function (itm) {
+                return itm._id == item._id;
+            })[0];
+            selected.qty++;
+            selected.total = selected.price * selected.qty;
+        }
+        else {
+            item.qty = 1;
+            item.total = item.price * item.qty;
+            this.basket.push(item);
+        }
+        // updatePageAndItem
+        this.updatePageAndItem();
+        // sum price
+        this.updateTotalPrice();
+    };
+    BuyProductPage.prototype.presentPopover = function (myEvent) {
+        var popover = this.popoverCtrl.create(PopoverPage);
+        popover.present({
+            ev: myEvent
+        });
+    };
+    BuyProductPage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/buy-product/buy-product.html',
+        }), 
+        __metadata('design:paramtypes', [http_1.Http, ionic_angular_1.PopoverController, ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.AlertController, ionic_angular_1.ModalController, ionic_angular_1.ViewController])
+    ], BuyProductPage);
+    return BuyProductPage;
+}());
+exports.BuyProductPage = BuyProductPage;
+var PopoverPage = (function () {
+    function PopoverPage(viewCtrl) {
+        this.viewCtrl = viewCtrl;
+    }
+    PopoverPage.prototype.close = function () {
+        this.viewCtrl.dismiss();
+    };
+    PopoverPage = __decorate([
+        core_1.Component({
+            template: "\n    <ion-list>\n      <ion-list-header>\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32</ion-list-header>\n      <ion-item (click)=\"close()\">\u0E40\u0E04\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E40\u0E02\u0E35\u0E22\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E2A\u0E33\u0E19\u0E31\u0E01\u0E07\u0E32\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E15\u0E01\u0E41\u0E15\u0E48\u0E07\u0E1A\u0E49\u0E32\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E44\u0E1F\u0E1F\u0E49\u0E32</ion-item>\n      <ion-item (click)=\"close()\">\u0E2D\u0E38\u0E1B\u0E01\u0E23\u0E13\u0E4C\u0E15\u0E01\u0E41\u0E15\u0E48\u0E07\u0E2A\u0E27\u0E19</ion-item>\n      <ion-item (click)=\"close()\">\u0E02\u0E2D\u0E07\u0E43\u0E0A\u0E49\u0E17\u0E31\u0E48\u0E27\u0E44\u0E1B</ion-item>\n      <ion-item (click)=\"close()\">\u0E2B\u0E49\u0E2D\u0E07\u0E19\u0E2D\u0E19</ion-item>\n    </ion-list>\n  "
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.ViewController])
+    ], PopoverPage);
+    return PopoverPage;
+}());
+
+},{"@angular/core":153,"@angular/http":280,"ionic-angular":467,"rxjs/add/operator/map":580}],3:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+var order_1 = require('../order/order');
+var trading_1 = require('../trading/trading');
+var HomePage = (function () {
+    function HomePage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    HomePage.prototype.openOrderPage = function () {
+        this.navCtrl.push(order_1.OrderPage);
+    };
+    HomePage.prototype.openTrading = function () {
+        this.navCtrl.push(trading_1.TradingPage);
+    };
+    HomePage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/home/home.html'
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController])
+    ], HomePage);
+    return HomePage;
+}());
+exports.HomePage = HomePage;
+
+},{"../order/order":4,"../trading/trading":5,"@angular/core":153,"ionic-angular":467}],4:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+/*
+  Generated class for the OrderPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+var OrderPage = (function () {
+    function OrderPage(navCtrl) {
+        this.navCtrl = navCtrl;
+        this.order = [{ orderNum: '1', createDate: '3/10/59', createBy: 'mos', listItem: 'pen', seller: 'homepro', payment: 'pay' },
+            { orderNum: '2', createDate: '3/11/59', createBy: 'duke', listItem: 'teble', seller: 'homepro', payment: 'pay' },
+            { orderNum: '3', createDate: '3/12/59', createBy: 'nong', listItem: 'telephone', seller: 'itcenter', payment: 'pay' },
+            { orderNum: '4', createDate: '3/12/59', createBy: 'duke', listItem: 'mouse', seller: 'tesgo lotus', payment: 'pay' },
+            { orderNum: '5', createDate: '3/12/59', createBy: 'nong', listItem: 'note book', seller: 'bigc', payment: 'pay' }
+        ];
+    }
+    OrderPage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/order/order.html',
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController])
+    ], OrderPage);
+    return OrderPage;
+}());
+exports.OrderPage = OrderPage;
+
+},{"@angular/core":153,"ionic-angular":467}],5:[function(require,module,exports){
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var ionic_angular_1 = require('ionic-angular');
+var buy_product_1 = require('../buy-product/buy-product');
+/*
+  Generated class for the TradingPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+var TradingPage = (function () {
+    function TradingPage(navCtrl) {
+        this.navCtrl = navCtrl;
+        this.Trading = [
+            { name: "เงินสด", icon: "images/money175x175.jpg", tel: "0124634855", address: "ร้านลุงแปะ" },
+            { name: "HomePro", icon: "images/Homepro175x175.png", tel: "023564789", address: " 99 หมู่ 6, ลำลูกกา, ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี, 12150" },
+            { name: "Big C", icon: "images/big-c175x175.png", tel: "027364842", address: ": 10 หมู่ 12 ตำบลบึงคำพร้อย อำเภอลำลูกกา ปทุมธานี 12150" },
+            { name: "Lotus", icon: "images/Lotus175x175.png", tel: "023873453", address: " 20/68 หมู่ที่ 18 ต.คูคต อ.ลำลูกกา ปทุมธานี 12150" }
+        ];
+    }
+    TradingPage.prototype.addname = function (Modelname) {
+        this.Trading.push({ name: Modelname });
+    };
+    TradingPage.prototype.TradingSelected = function (Trad) {
+        this.navCtrl.push(buy_product_1.BuyProductPage, { "companydetail": Trad });
+    };
+    TradingPage = __decorate([
+        core_1.Component({
+            templateUrl: 'build/pages/trading/trading.html',
+        }), 
+        __metadata('design:paramtypes', [ionic_angular_1.NavController])
+    ], TradingPage);
+    return TradingPage;
+}());
+exports.TradingPage = TradingPage;
+
+},{"../buy-product/buy-product":2,"@angular/core":153,"ionic-angular":467}],6:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -1545,7 +2087,15 @@ var EventEmitter = (function (_super) {
 }(Subject_1.Subject));
 exports.EventEmitter = EventEmitter;
 
+<<<<<<< HEAD
 },{"./lang":25,"./promise":26,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],20:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./lang":25,"./promise":26,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],20:[function(require,module,exports){
+=======
+},{"./lang":23,"./promise":24,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],18:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -11089,7 +11639,19 @@ var SimpleExpressionChecker = (function () {
     return SimpleExpressionChecker;
 }());
 
+<<<<<<< HEAD
 },{"../chars":81,"../facade/collection":93,"../facade/exceptions":95,"../facade/lang":96,"../interpolation_config":110,"./ast":88,"./lexer":89,"@angular/core":155}],91:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../chars":81,"../facade/collection":93,"../facade/exceptions":95,"../facade/lang":96,"../interpolation_config":110,"./ast":88,"./lexer":89,"@angular/core":155}],91:[function(require,module,exports){
+=======
+},{"../chars":79,"../facade/collection":91,"../facade/exceptions":93,"../facade/lang":94,"../interpolation_config":108,"./ast":86,"./lexer":87,"@angular/core":153}],89:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"./lang":94,"./promise":96,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],90:[function(require,module,exports){
+arguments[4][18][0].apply(exports,arguments)
+},{"dup":18}],91:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 arguments[4][19][0].apply(exports,arguments)
 },{"./lang":96,"./promise":98,"dup":19,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],92:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -30228,7 +30790,19 @@ function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, 
     return new ReflectiveDependency(reflective_key_1.ReflectiveKey.get(token), optional, lowerBoundVisibility, upperBoundVisibility, depProps);
 }
 
+<<<<<<< HEAD
 },{"../facade/collection":196,"../facade/lang":199,"../reflection/reflection":231,"./forward_ref":184,"./metadata":186,"./provider":188,"./provider_util":189,"./reflective_exceptions":190,"./reflective_key":192}],194:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../facade/collection":196,"../facade/lang":199,"../reflection/reflection":231,"./forward_ref":184,"./metadata":186,"./provider":188,"./provider_util":189,"./reflective_exceptions":190,"./reflective_key":192}],194:[function(require,module,exports){
+=======
+},{"../facade/collection":194,"../facade/lang":197,"../reflection/reflection":229,"./forward_ref":182,"./metadata":184,"./provider":186,"./provider_util":187,"./reflective_exceptions":188,"./reflective_key":190}],192:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"./lang":197,"./promise":199,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],193:[function(require,module,exports){
+arguments[4][18][0].apply(exports,arguments)
+},{"dup":18}],194:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 arguments[4][19][0].apply(exports,arguments)
 },{"./lang":199,"./promise":201,"dup":19,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],195:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -39555,7 +40129,19 @@ var PatternValidator = (function () {
 }());
 exports.PatternValidator = PatternValidator;
 
+<<<<<<< HEAD
 },{"../facade/lang":274,"../validators":280,"@angular/core":155}],269:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../facade/lang":274,"../validators":280,"@angular/core":155}],269:[function(require,module,exports){
+=======
+},{"../facade/lang":272,"../validators":278,"@angular/core":153}],267:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"./lang":272,"./promise":273,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],268:[function(require,module,exports){
+arguments[4][18][0].apply(exports,arguments)
+},{"dup":18}],269:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 arguments[4][19][0].apply(exports,arguments)
 },{"./lang":274,"./promise":275,"dup":19,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],270:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -43508,7 +44094,19 @@ function bootstrapWorkerApp(appComponentType, customProviders) {
 }
 exports.bootstrapWorkerApp = bootstrapWorkerApp;
 
+<<<<<<< HEAD
 },{"./core_private":302,"./src/facade/async":304,"./src/facade/lang":309,"./src/xhr/xhr_cache":311,"./src/xhr/xhr_impl":312,"@angular/common":8,"@angular/compiler":74,"@angular/core":155,"@angular/platform-browser":314}],304:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./core_private":302,"./src/facade/async":304,"./src/facade/lang":309,"./src/xhr/xhr_cache":311,"./src/xhr/xhr_impl":312,"@angular/common":8,"@angular/compiler":74,"@angular/core":155,"@angular/platform-browser":314}],304:[function(require,module,exports){
+=======
+},{"./core_private":300,"./src/facade/async":302,"./src/facade/lang":307,"./src/xhr/xhr_cache":309,"./src/xhr/xhr_impl":310,"@angular/common":6,"@angular/compiler":72,"@angular/core":153,"@angular/platform-browser":312}],302:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"./lang":307,"./promise":308,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],303:[function(require,module,exports){
+arguments[4][18][0].apply(exports,arguments)
+},{"dup":18}],304:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 arguments[4][19][0].apply(exports,arguments)
 },{"./lang":309,"./promise":310,"dup":19,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],305:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
@@ -46344,11 +46942,25 @@ var WebAnimationsPlayer = (function () {
 }());
 exports.WebAnimationsPlayer = WebAnimationsPlayer;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 },{"../facade/lang":345}],339:[function(require,module,exports){
 arguments[4][19][0].apply(exports,arguments)
 },{"./lang":345,"./promise":346,"dup":19,"rxjs/Observable":576,"rxjs/Subject":578,"rxjs/observable/PromiseObservable":583,"rxjs/operator/toPromise":585}],340:[function(require,module,exports){
 arguments[4][20][0].apply(exports,arguments)
 },{"dup":20}],341:[function(require,module,exports){
+<<<<<<< HEAD
+=======
+=======
+},{"../facade/lang":343}],337:[function(require,module,exports){
+arguments[4][17][0].apply(exports,arguments)
+},{"./lang":343,"./promise":344,"dup":17,"rxjs/Observable":574,"rxjs/Subject":576,"rxjs/observable/PromiseObservable":581,"rxjs/operator/toPromise":583}],338:[function(require,module,exports){
+arguments[4][18][0].apply(exports,arguments)
+},{"dup":18}],339:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -94241,7 +94853,15 @@ var Observable = (function () {
 }());
 exports.Observable = Observable;
 
+<<<<<<< HEAD
 },{"./symbol/observable":586,"./util/root":594,"./util/toSubscriber":596}],577:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./symbol/observable":586,"./util/root":594,"./util/toSubscriber":596}],577:[function(require,module,exports){
+=======
+},{"./symbol/observable":584,"./util/root":592,"./util/toSubscriber":594}],575:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 exports.empty = {
     isUnsubscribed: true,
@@ -94457,7 +95077,15 @@ var SubjectObservable = (function (_super) {
     return SubjectObservable;
 }(Observable_1.Observable));
 
+<<<<<<< HEAD
 },{"./Observable":576,"./SubjectSubscription":579,"./Subscriber":580,"./Subscription":581,"./symbol/rxSubscriber":587,"./util/ObjectUnsubscribedError":588,"./util/throwError":595}],579:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./Observable":576,"./SubjectSubscription":579,"./Subscriber":580,"./Subscription":581,"./symbol/rxSubscriber":587,"./util/ObjectUnsubscribedError":588,"./util/throwError":595}],579:[function(require,module,exports){
+=======
+},{"./Observable":574,"./SubjectSubscription":577,"./Subscriber":578,"./Subscription":579,"./symbol/rxSubscriber":585,"./util/ObjectUnsubscribedError":586,"./util/throwError":593}],577:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -94750,7 +95378,15 @@ var SafeSubscriber = (function (_super) {
     return SafeSubscriber;
 }(Subscriber));
 
+<<<<<<< HEAD
 },{"./Observer":577,"./Subscription":581,"./symbol/rxSubscriber":587,"./util/isFunction":592}],581:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./Observer":577,"./Subscription":581,"./symbol/rxSubscriber":587,"./util/isFunction":592}],581:[function(require,module,exports){
+=======
+},{"./Observer":575,"./Subscription":579,"./symbol/rxSubscriber":585,"./util/isFunction":590}],579:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var isArray_1 = require('./util/isArray');
 var isObject_1 = require('./util/isObject');
@@ -94901,13 +95537,29 @@ var Subscription = (function () {
 }());
 exports.Subscription = Subscription;
 
+<<<<<<< HEAD
 },{"./util/UnsubscriptionError":589,"./util/errorObject":590,"./util/isArray":591,"./util/isFunction":592,"./util/isObject":593,"./util/tryCatch":597}],582:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"./util/UnsubscriptionError":589,"./util/errorObject":590,"./util/isArray":591,"./util/isFunction":592,"./util/isObject":593,"./util/tryCatch":597}],582:[function(require,module,exports){
+=======
+},{"./util/UnsubscriptionError":587,"./util/errorObject":588,"./util/isArray":589,"./util/isFunction":590,"./util/isObject":591,"./util/tryCatch":595}],580:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var Observable_1 = require('../../Observable');
 var map_1 = require('../../operator/map');
 Observable_1.Observable.prototype.map = map_1.map;
 
+<<<<<<< HEAD
 },{"../../Observable":576,"../../operator/map":584}],583:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../../Observable":576,"../../operator/map":584}],583:[function(require,module,exports){
+=======
+},{"../../Observable":574,"../../operator/map":582}],581:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -95013,7 +95665,15 @@ function dispatchError(arg) {
     }
 }
 
+<<<<<<< HEAD
 },{"../Observable":576,"../util/root":594}],584:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../Observable":576,"../util/root":594}],584:[function(require,module,exports){
+=======
+},{"../Observable":574,"../util/root":592}],582:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -95100,7 +95760,15 @@ var MapSubscriber = (function (_super) {
     return MapSubscriber;
 }(Subscriber_1.Subscriber));
 
+<<<<<<< HEAD
 },{"../Subscriber":580}],585:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../Subscriber":580}],585:[function(require,module,exports){
+=======
+},{"../Subscriber":578}],583:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var root_1 = require('../util/root');
 /**
@@ -95129,7 +95797,15 @@ function toPromise(PromiseCtor) {
 }
 exports.toPromise = toPromise;
 
+<<<<<<< HEAD
 },{"../util/root":594}],586:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../util/root":594}],586:[function(require,module,exports){
+=======
+},{"../util/root":592}],584:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
@@ -95151,14 +95827,30 @@ else {
     exports.$$observable = '@@observable';
 }
 
+<<<<<<< HEAD
 },{"../util/root":594}],587:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../util/root":594}],587:[function(require,module,exports){
+=======
+},{"../util/root":592}],585:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var root_1 = require('../util/root');
 var Symbol = root_1.root.Symbol;
 exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
     Symbol.for('rxSubscriber') : '@@rxSubscriber';
 
+<<<<<<< HEAD
 },{"../util/root":594}],588:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../util/root":594}],588:[function(require,module,exports){
+=======
+},{"../util/root":592}],586:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -95184,7 +95876,15 @@ var ObjectUnsubscribedError = (function (_super) {
 }(Error));
 exports.ObjectUnsubscribedError = ObjectUnsubscribedError;
 
+<<<<<<< HEAD
 },{}],589:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],589:[function(require,module,exports){
+=======
+},{}],587:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -95207,30 +95907,70 @@ var UnsubscriptionError = (function (_super) {
 }(Error));
 exports.UnsubscriptionError = UnsubscriptionError;
 
+<<<<<<< HEAD
 },{}],590:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],590:[function(require,module,exports){
+=======
+},{}],588:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 // typeof any so that it we don't have to cast when comparing a result to the error object
 exports.errorObject = { e: {} };
 
+<<<<<<< HEAD
 },{}],591:[function(require,module,exports){
 "use strict";
 exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
 
 },{}],592:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],591:[function(require,module,exports){
+"use strict";
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+
+},{}],592:[function(require,module,exports){
+=======
+},{}],589:[function(require,module,exports){
+"use strict";
+exports.isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
+
+},{}],590:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 function isFunction(x) {
     return typeof x === 'function';
 }
 exports.isFunction = isFunction;
 
+<<<<<<< HEAD
 },{}],593:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],593:[function(require,module,exports){
+=======
+},{}],591:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 function isObject(x) {
     return x != null && typeof x === 'object';
 }
 exports.isObject = isObject;
 
+<<<<<<< HEAD
 },{}],594:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],594:[function(require,module,exports){
+=======
+},{}],592:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 (function (global){
 "use strict";
 var objectTypes = {
@@ -95252,12 +95992,28 @@ if (freeGlobal && (freeGlobal.global === freeGlobal || freeGlobal.window === fre
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
+<<<<<<< HEAD
 },{}],595:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],595:[function(require,module,exports){
+=======
+},{}],593:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 function throwError(e) { throw e; }
 exports.throwError = throwError;
 
+<<<<<<< HEAD
 },{}],596:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{}],596:[function(require,module,exports){
+=======
+},{}],594:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var Subscriber_1 = require('../Subscriber');
 var rxSubscriber_1 = require('../symbol/rxSubscriber');
@@ -95274,7 +96030,15 @@ function toSubscriber(nextOrObserver, error, complete) {
 }
 exports.toSubscriber = toSubscriber;
 
+<<<<<<< HEAD
 },{"../Subscriber":580,"../symbol/rxSubscriber":587}],597:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"../Subscriber":580,"../symbol/rxSubscriber":587}],597:[function(require,module,exports){
+=======
+},{"../Subscriber":578,"../symbol/rxSubscriber":585}],595:[function(require,module,exports){
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 "use strict";
 var errorObject_1 = require('./errorObject');
 var tryCatchTarget;
@@ -95294,9 +96058,21 @@ function tryCatch(fn) {
 exports.tryCatch = tryCatch;
 ;
 
+<<<<<<< HEAD
 },{"./errorObject":590}],598:[function(require,module,exports){
 
 },{}]},{},[1,598])
+=======
+<<<<<<< HEAD
+},{"./errorObject":590}],598:[function(require,module,exports){
+
+},{}]},{},[1,598])
+=======
+},{"./errorObject":588}],596:[function(require,module,exports){
+
+},{}]},{},[1,596])
+>>>>>>> ee87b44d21d1767752e669c2e852ae65287b2b57
+>>>>>>> 7eca2439f96ff2cdebc35b5bee402e066ab9cf4c
 
 
 //# sourceMappingURL=app.bundle.js.map

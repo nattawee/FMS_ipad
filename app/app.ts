@@ -4,6 +4,7 @@ import { StatusBar } from 'ionic-native';
 import { HomePage } from './pages/home/home';
 // import { PaidVoucherPage } from './pages/paid-voucher/paid-voucher';
 
+
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>'
 })
