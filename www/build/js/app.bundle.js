@@ -331,7 +331,7 @@ var PaidVoucherOrderPage = (function () {
             output.push(this.product.Products[i].Category);
             this.fillterCate = output;
         }
-        var productPerCate = 6;
+        var productPerCate = 3;
         var pageCate = Math.ceil(this.fillterCate.length / productPerCate);
         var ii2 = 0;
         for (var i_1 = 0; i_1 < pageCate; i_1++) {
@@ -526,7 +526,7 @@ var TaxInvoiceOrderPage = (function () {
             output.push(this.product.Product[i].Category);
             this.fillterCate = output;
         }
-        var productPerCate = 6;
+        var productPerCate = 3;
         var pageCate = Math.ceil(this.fillterCate.length / productPerCate);
         var ii2 = 0;
         for (var i_1 = 0; i_1 < pageCate; i_1++) {

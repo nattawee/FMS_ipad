@@ -28,7 +28,7 @@ export class PaidVoucherOrderPage {
       output.push(this.product.Products[i].Category);
       this.fillterCate = output;
     }
-    let productPerCate = 6;
+    let productPerCate = 3;
     let pageCate = Math.ceil(this.fillterCate.length / productPerCate);
     let ii2 = 0;
     for (let i = 0; i < pageCate; i++) {
