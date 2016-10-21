@@ -308,12 +308,6 @@ var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
-/*
-  Generated class for the PaidVoucherOrderPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 var PaidVoucherOrderPage = (function () {
     function PaidVoucherOrderPage(navCtrl, navParams, http) {
         this.navCtrl = navCtrl;
@@ -378,7 +372,6 @@ var PaidVoucherOrderPage = (function () {
     };
     PaidVoucherOrderPage.prototype.chooseProduct = function (item) {
         this.selectbasket.push(item);
-        console.log(this.selectbasket);
     };
     PaidVoucherOrderPage.prototype.cancelPage = function () {
         this.navCtrl.pop();
@@ -558,7 +551,6 @@ var TaxInvoiceOrderPage = (function () {
     };
     TaxInvoiceOrderPage.prototype.chooseProduct = function (item) {
         this.selectbasket.push(item);
-        console.log(this.selectbasket);
     };
     TaxInvoiceOrderPage.prototype.cancelPage = function () {
         this.navCtrl.pop();

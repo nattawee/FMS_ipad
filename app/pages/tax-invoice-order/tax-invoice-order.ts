@@ -68,7 +68,6 @@ export class TaxInvoiceOrderPage {
 
   chooseProduct(item) {
     this.selectbasket.push(item);
-    console.log(this.selectbasket);
   }
 
   cancelPage() {

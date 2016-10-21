@@ -1,9 +1,3 @@
-<!--
-  Generated template for the PaidVoucherOrderPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
 	<ion-navbar>
@@ -141,7 +135,7 @@
 									<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
 										<ion-col style="flex: 0 0 48%;  max-width: 48%; text-align: center; padding: 0; margin-left:8px;" *ngFor="let item of page.basket"
 											(click)="chooseProduct(item)">
-											<button block ion-button color="secondary">{{item.Name}}<br> {{item.PriceNotIncludeVat}}</button>
+											<button block ion-button color="secondary">{{item.Name}}<br> ราคา {{item.PriceNotIncludeVat}} บาท</button>
 										</ion-col>
 									</ion-row>
 								</ion-slide>

@@ -3,12 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the PaidVoucherOrderPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/paid-voucher-order/paid-voucher-order.html',
 })
@@ -79,7 +73,6 @@ export class PaidVoucherOrderPage {
 
   chooseProduct(item) {
     this.selectbasket.push(item);
-    console.log(this.selectbasket);
   }
 
   cancelPage(){
