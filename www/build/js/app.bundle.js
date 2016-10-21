@@ -319,8 +319,8 @@ var PaidVoucherOrderPage = (function () {
         this.basket = [];
         this.selectbasket = [];
         this.box = [];
+        this.totalPrice = 0;
         this.paidvoucherdetail = navParams.get('paidvoucherdetail');
-        console.log(this.paidvoucherdetail);
         this.product = this.paidvoucherdetail;
         this.chooseCate('Category');
         var flags = [], output = [], l = this.product.Products.length, i;
@@ -330,9 +330,6 @@ var PaidVoucherOrderPage = (function () {
             flags[this.product.Products[i].Category] = true;
             output.push(this.product.Products[i].Category);
             this.fillterCate = output;
-            console.log(output);
-            console.log("PASS");
-            console.log(this.fillterCate);
         }
         var productPerCate = 6;
         var pageCate = Math.ceil(this.fillterCate.length / productPerCate);
@@ -346,15 +343,11 @@ var PaidVoucherOrderPage = (function () {
             }
             this.boxcate.push(pp);
         }
-        console.log(this.boxcate);
     }
     PaidVoucherOrderPage.prototype.chooseCate = function (cate) {
-        // console.log(this.orders.order); 
-        console.log(cate);
         this.basket = this.product.Products.filter(function (el) {
             return (el.Category === cate);
         });
-        console.log(this.basket);
         this.box = [];
         var productPerPage = 12;
         var page = Math.ceil(this.basket.length / productPerPage);
@@ -368,10 +361,36 @@ var PaidVoucherOrderPage = (function () {
             }
             this.box.push(pp);
         }
-        console.log(this.box);
     };
     PaidVoucherOrderPage.prototype.chooseProduct = function (item) {
-        this.selectbasket.push(item);
+        if (this.arrayIndexOf(this.selectbasket, item) != -1) {
+            var selected = this.selectbasket.filter(function (itm) {
+                return itm._id == item._id;
+            })[0];
+            selected.QTY++;
+            selected.total = selected.Price * selected.QTY;
+        }
+        else {
+            item.QTY = 1;
+            item.total = item.Price * item.QTY;
+            this.selectbasket.push(item);
+        }
+        // sum price
+        this.updateTotalPrice();
+    };
+    PaidVoucherOrderPage.prototype.updateTotalPrice = function () {
+        this.totalPrice = 0;
+        for (var i = 0; i < this.selectbasket.length; i++) {
+            this.totalPrice += this.selectbasket[i].Price * this.selectbasket[i].QTY;
+        }
+    };
+    PaidVoucherOrderPage.prototype.arrayIndexOf = function (myArr, key) {
+        var result = -1;
+        myArr.forEach(function (idx) {
+            if (idx._id == key._id)
+                result++;
+        });
+        return result;
     };
     PaidVoucherOrderPage.prototype.cancelPage = function () {
         this.navCtrl.pop();
@@ -402,12 +421,6 @@ var ionic_angular_1 = require('ionic-angular');
 var paid_voucher_order_1 = require('../paid-voucher-order/paid-voucher-order');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
-/*
-  Generated class for the PaidVoucherPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 var PaidVoucherPage = (function () {
     function PaidVoucherPage(navCtrl, http) {
         var _this = this;
@@ -418,9 +431,7 @@ var PaidVoucherPage = (function () {
             return res.json();
         }).subscribe(function (data) {
             _this.paidvoucher = data;
-            console.dir(data);
         });
-        // console.log( this.paidvoucher.Products);
     }
     PaidVoucherPage.prototype.openPVO = function (item) {
         this.navCtrl.push(paid_voucher_order_1.PaidVoucherOrderPage, { "paidvoucherdetail": item });
@@ -503,8 +514,8 @@ var TaxInvoiceOrderPage = (function () {
         this.basket = [];
         this.selectbasket = [];
         this.box = [];
+        this.totalPrice = 0;
         this.taxInvoiceDetail = navParams.get('taxInvoiceDetail');
-        console.log(this.taxInvoiceDetail);
         this.product = this.taxInvoiceDetail;
         this.chooseCate('สินค้า');
         var flags = [], output = [], l = this.product.Product.length, i;
@@ -527,13 +538,11 @@ var TaxInvoiceOrderPage = (function () {
             }
             this.boxcate.push(pp);
         }
-        console.log(this.boxcate);
     }
     TaxInvoiceOrderPage.prototype.chooseCate = function (cate) {
         this.basket = this.product.Product.filter(function (el) {
             return (el.Category === cate);
         });
-        console.log(this.basket);
         this.box = [];
         var productPerPage = 12;
         var page = Math.ceil(this.basket.length / productPerPage);
@@ -547,10 +556,36 @@ var TaxInvoiceOrderPage = (function () {
             }
             this.box.push(pp);
         }
-        console.log(this.box);
     };
     TaxInvoiceOrderPage.prototype.chooseProduct = function (item) {
-        this.selectbasket.push(item);
+        if (this.arrayIndexOf(this.selectbasket, item) != -1) {
+            var selected = this.selectbasket.filter(function (itm) {
+                return itm._id == item._id;
+            })[0];
+            selected.QTY++;
+            selected.total = selected.Price * selected.QTY;
+        }
+        else {
+            item.QTY = 1;
+            item.total = item.Price * item.QTY;
+            this.selectbasket.push(item);
+        }
+        // sum price
+        this.updateTotalPrice();
+    };
+    TaxInvoiceOrderPage.prototype.updateTotalPrice = function () {
+        this.totalPrice = 0;
+        for (var i = 0; i < this.selectbasket.length; i++) {
+            this.totalPrice += this.selectbasket[i].Price * this.selectbasket[i].QTY;
+        }
+    };
+    TaxInvoiceOrderPage.prototype.arrayIndexOf = function (myArr, key) {
+        var result = -1;
+        myArr.forEach(function (idx) {
+            if (idx._id == key._id)
+                result++;
+        });
+        return result;
     };
     TaxInvoiceOrderPage.prototype.cancelPage = function () {
         this.navCtrl.pop();
@@ -591,7 +626,6 @@ var TaxInvoicePage = (function () {
             return res.json();
         }).subscribe(function (data) {
             _this.taxInvoice = data;
-            console.dir(data);
         });
     }
     TaxInvoicePage.prototype.openPVO = function (item) {

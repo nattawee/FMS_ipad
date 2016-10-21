@@ -14,10 +14,10 @@ export class TaxInvoiceOrderPage {
   basket: any = [];
   selectbasket: any = [];
   box: any = [];
+  totalPrice: any = 0;
 
   constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
     this.taxInvoiceDetail = navParams.get('taxInvoiceDetail');
-    console.log(this.taxInvoiceDetail);
     this.product = this.taxInvoiceDetail;
     this.chooseCate('สินค้า');
     let flags = [], output = [], l = this.product.Product.length, i;
@@ -40,16 +40,12 @@ export class TaxInvoiceOrderPage {
       }
       this.boxcate.push(pp);
     }
-    console.log(this.boxcate);
-
-
-
   }
+
   chooseCate(cate) {
     this.basket = this.product.Product.filter(function (el) {
       return (el.Category === cate);
     });
-    console.log(this.basket);
     this.box = [];
     let productPerPage = 12;
     let page = Math.ceil(this.basket.length / productPerPage);
@@ -63,11 +59,37 @@ export class TaxInvoiceOrderPage {
       }
       this.box.push(pp);
     }
-    console.log(this.box);
   }
 
   chooseProduct(item) {
-    this.selectbasket.push(item);
+    if (this.arrayIndexOf(this.selectbasket, item) != -1) {
+      let selected = this.selectbasket.filter(function (itm) {
+        return itm._id == item._id;
+      })[0];
+      selected.QTY++;
+      selected.total = selected.Price * selected.QTY;
+    } else {
+      item.QTY = 1;
+      item.total = item.Price * item.QTY;
+      this.selectbasket.push(item);
+    }
+    // sum price
+    this.updateTotalPrice();
+  }
+
+  updateTotalPrice() {
+    this.totalPrice = 0;
+    for (let i = 0; i < this.selectbasket.length; i++) {
+      this.totalPrice += this.selectbasket[i].Price * this.selectbasket[i].QTY;
+    }
+  }
+
+  arrayIndexOf(myArr, key) {
+    let result = -1;
+    myArr.forEach(function (idx) {
+      if (idx._id == key._id) result++;
+    });
+    return result;
   }
 
   cancelPage() {

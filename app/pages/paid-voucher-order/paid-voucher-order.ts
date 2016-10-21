@@ -14,10 +14,10 @@ export class PaidVoucherOrderPage {
   basket: any = [];
   selectbasket: any = [];
   box: any = [];
+  totalPrice: any = 0;
 
   constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
     this.paidvoucherdetail = navParams.get('paidvoucherdetail');
-    console.log(this.paidvoucherdetail);
     this.product = this.paidvoucherdetail;
     this.chooseCate('Category');
     let flags = [], output = [], l = this.product.Products.length, i;
@@ -27,9 +27,6 @@ export class PaidVoucherOrderPage {
       flags[this.product.Products[i].Category] = true;
       output.push(this.product.Products[i].Category);
       this.fillterCate = output;
-      console.log(output);
-      console.log("PASS");
-      console.log(this.fillterCate);
     }
     let productPerCate = 6;
     let pageCate = Math.ceil(this.fillterCate.length / productPerCate);
@@ -43,18 +40,12 @@ export class PaidVoucherOrderPage {
       }
       this.boxcate.push(pp);
     }
-    console.log(this.boxcate);
-
-
-
   }
+
   chooseCate(cate) {
-    // console.log(this.orders.order); 
-    console.log(cate);
     this.basket = this.product.Products.filter(function (el) {
       return (el.Category === cate);
     });
-    console.log(this.basket);
     this.box = [];
     let productPerPage = 12;
     let page = Math.ceil(this.basket.length / productPerPage);
@@ -68,14 +59,40 @@ export class PaidVoucherOrderPage {
       }
       this.box.push(pp);
     }
-    console.log(this.box);
   }
 
   chooseProduct(item) {
-    this.selectbasket.push(item);
+    if (this.arrayIndexOf(this.selectbasket, item) != -1) {
+      let selected = this.selectbasket.filter(function (itm) {
+        return itm._id == item._id;
+      })[0];
+      selected.QTY++;
+      selected.total = selected.Price * selected.QTY;
+    } else {
+      item.QTY = 1;
+      item.total = item.Price * item.QTY;
+      this.selectbasket.push(item);
+    }
+    // sum price
+    this.updateTotalPrice();
   }
 
-  cancelPage(){
+  updateTotalPrice() {
+    this.totalPrice = 0;
+    for (let i = 0; i < this.selectbasket.length; i++) {
+      this.totalPrice += this.selectbasket[i].Price * this.selectbasket[i].QTY;
+    }
+  }
+
+  arrayIndexOf(myArr, key) {
+    let result = -1;
+    myArr.forEach(function (idx) {
+      if (idx._id == key._id) result++;
+    });
+    return result;
+  }
+
+  cancelPage() {
     this.navCtrl.pop();
   }
 }

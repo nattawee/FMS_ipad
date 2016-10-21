@@ -17,8 +17,6 @@ export class TaxInvoicePage {
 
     }).subscribe(data => {
       this.taxInvoice = data;
-      console.dir(data);
-      
     });
   }
 
