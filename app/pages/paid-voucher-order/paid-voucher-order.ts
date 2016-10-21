@@ -19,7 +19,7 @@ export class PaidVoucherOrderPage {
   constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
     this.paidvoucherdetail = navParams.get('paidvoucherdetail');
     this.product = this.paidvoucherdetail;
-    this.chooseCate('Category');
+    this.chooseCate('สินค้า');
     let flags = [], output = [], l = this.product.Products.length, i;
 
     for (i = 0; i < l; i++) {

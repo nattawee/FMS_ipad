@@ -322,7 +322,7 @@ var PaidVoucherOrderPage = (function () {
         this.totalPrice = 0;
         this.paidvoucherdetail = navParams.get('paidvoucherdetail');
         this.product = this.paidvoucherdetail;
-        this.chooseCate('Category');
+        this.chooseCate('สินค้า');
         var flags = [], output = [], l = this.product.Products.length, i;
         for (i = 0; i < l; i++) {
             if (flags[this.product.Products[i].Category])
