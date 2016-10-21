@@ -24,8 +24,8 @@ export class PaidVoucherOrderPage {
   constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
     this.paidvoucherdetail = navParams.get('paidvoucherdetail');
     console.log(this.paidvoucherdetail);
-
     this.product = this.paidvoucherdetail;
+    this.chooseCate('Category');
     let flags = [], output = [], l = this.product.Products.length, i;
 
     for (i = 0; i < l; i++) {
@@ -77,10 +77,14 @@ export class PaidVoucherOrderPage {
     console.log(this.box);
   }
 
-chooseProduct(item){
-  this.selectbasket.push(item);
-  console.log(this.selectbasket);
-}
+  chooseProduct(item) {
+    this.selectbasket.push(item);
+    console.log(this.selectbasket);
+  }
+
+  cancelPage(){
+    this.navCtrl.pop();
+  }
 }
 
 
