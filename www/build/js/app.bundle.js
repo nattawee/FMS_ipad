@@ -415,7 +415,6 @@ var PaidVoucherOrderPage = (function () {
         confirm.present();
     };
     PaidVoucherOrderPage.prototype.deleteItem = function (item) {
-        console.log(item);
         for (var i = 0; i < this.selectbasket.length; i++) {
             if (this.selectbasket[i]._id == item._id) {
                 this.selectbasket.splice(i, 1);
@@ -423,6 +422,28 @@ var PaidVoucherOrderPage = (function () {
             }
         }
         this.updateTotalPrice();
+    };
+    PaidVoucherOrderPage.prototype.saveOrder = function () {
+        var _this = this;
+        var params = {
+            "DocNo": "99999",
+            "DocDate": "",
+            "InvoiceRef": "99999",
+            "Total": this.totalPrice * 1.07,
+            "VatTotal": this.totalPrice * 0.07,
+            "WHTTotal": 3,
+            "Amount": 1,
+            "PayDate": "",
+            "PayStated": "PayStated",
+            "PayRefNo": "PayRefNo",
+            "Products": this.selectbasket,
+            "Suplier": this.paidvoucherdetail.Suplier
+        };
+        this.http.post('https://pms-service.herokuapp.com/paidvoucher', params).map(function (res) {
+            return res.json();
+        }).subscribe(function (data) {
+            _this.navCtrl.pop();
+        });
     };
     PaidVoucherOrderPage = __decorate([
         core_1.Component({
