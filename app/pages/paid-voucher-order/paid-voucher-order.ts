@@ -125,22 +125,23 @@ export class PaidVoucherOrderPage {
   }
 
   saveOrder() {
+    let dateNow = new Date().toLocaleDateString();
     let params = {
       "DocNo": "99999",
-      "DocDate": "",
+      "DocDate": dateNow,
       "InvoiceRef": "99999",
       "Total": this.totalPrice * 1.07,
       "VatTotal": this.totalPrice * 0.07,
       "WHTTotal": 3,
       "Amount": 1,
-      "PayDate": "",
+      "PayDate": dateNow,
       "PayStated": "PayStated",
       "PayRefNo": "PayRefNo",
       "Products": this.selectbasket,
       "Suplier": this.paidvoucherdetail.Suplier
     }
 
-    this.http.post('https://pms-service.herokuapp.com/paidvoucher', params).map(res => {
+    this.http.post('https://pms-service.herokuapp.com/paidvoucherorder', params).map(res => {
       return res.json();
     }).subscribe(data => {
       this.navCtrl.pop();
