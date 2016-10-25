@@ -139,7 +139,7 @@
 							<ion-slides pager [options]="mySlideOptions" style="height:160px; margin-top:-50px;">
 								<ion-slide *ngFor="let page of boxcate">
 									<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
-										<ion-col style="flex: 0 0 32%;  max-width: 32%; text-align: center; padding: 0; margin-left:6px;" *ngFor="let cate of page.fillterCate"
+										<ion-col style="flex: 0 0 31%;  max-width: 32%; text-align: center; padding: 0; margin-left:6px;" *ngFor="let cate of page.fillterCate"
 											(click)="chooseCate(cate)">
 											<button block ion-button color="dark">{{cate}}</button>
 										</ion-col>

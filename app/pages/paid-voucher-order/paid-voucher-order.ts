@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,7 @@ export class PaidVoucherOrderPage {
   box: any = [];
   totalPrice: any = 0;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.paidvoucherdetail = navParams.get('paidvoucherdetail');
     this.product = this.paidvoucherdetail;
     this.chooseCate('สินค้า');
@@ -93,7 +93,36 @@ export class PaidVoucherOrderPage {
   }
 
   cancelPage() {
-    this.navCtrl.pop();
+    let confirm = this.alertCtrl.create({
+      title: 'ยืนยันการยกเลิกสินค้า',
+      message: `คุณต้องการยกเลิกสินค้าใช่หรือไม่`,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: () => {
+                this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  deleteItem(item) {
+    console.log(item);
+    for (let i = 0; i < this.selectbasket.length; i++) {
+              if (this.selectbasket[i]._id == item._id) {
+                this.selectbasket.splice(i, 1);
+                break;
+              }
+            }
+    this.updateTotalPrice();
   }
 }
 

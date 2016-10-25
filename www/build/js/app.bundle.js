@@ -309,10 +309,11 @@ var ionic_angular_1 = require('ionic-angular');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var PaidVoucherOrderPage = (function () {
-    function PaidVoucherOrderPage(navCtrl, navParams, http) {
+    function PaidVoucherOrderPage(navCtrl, navParams, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
+        this.alertCtrl = alertCtrl;
         this.product = [];
         this.fillterCate = [];
         this.boxcate = [];
@@ -393,13 +394,41 @@ var PaidVoucherOrderPage = (function () {
         return result;
     };
     PaidVoucherOrderPage.prototype.cancelPage = function () {
-        this.navCtrl.pop();
+        var _this = this;
+        var confirm = this.alertCtrl.create({
+            title: 'ยืนยันการยกเลิกสินค้า',
+            message: "\u0E04\u0E38\u0E13\u0E15\u0E49\u0E2D\u0E07\u0E01\u0E32\u0E23\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E43\u0E0A\u0E48\u0E2B\u0E23\u0E37\u0E2D\u0E44\u0E21\u0E48",
+            buttons: [
+                {
+                    text: 'ยกเลิก',
+                    handler: function () {
+                    }
+                },
+                {
+                    text: 'ตกลง',
+                    handler: function () {
+                        _this.navCtrl.pop();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    PaidVoucherOrderPage.prototype.deleteItem = function (item) {
+        console.log(item);
+        for (var i = 0; i < this.selectbasket.length; i++) {
+            if (this.selectbasket[i]._id == item._id) {
+                this.selectbasket.splice(i, 1);
+                break;
+            }
+        }
+        this.updateTotalPrice();
     };
     PaidVoucherOrderPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/paid-voucher-order/paid-voucher-order.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, http_1.Http])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, http_1.Http, ionic_angular_1.AlertController])
     ], PaidVoucherOrderPage);
     return PaidVoucherOrderPage;
 }());

@@ -8,18 +8,21 @@
 
 
 <ion-content padding>
-
-	<ion-grid>
-		<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
-			<ion-col style="flex: 0 0 33%;  max-width: 33%; text-align: center; padding: 0;" *ngFor="let item of paidvoucher">
-				<ion-card (click)="openPVO(item)">
-					<ion-col>
-						<label>{{item.Suplier.FullName}}</label></ion-col>
-					<ion-col><label> เลขที่</label>
-						<label>{{item.DocNo}}</label></ion-col>
-				</ion-card>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
-
+	<ion-card>
+		<ion-item>
+			<ion-grid>
+				<ion-row style="height: 100%;padding: 0; flex-wrap: wrap;">
+					<ion-col style="flex: 0 0 33%;  max-width: 33%; text-align: center; padding: 0;" *ngFor="let item of paidvoucher">
+						<ion-card (click)="openPVO(item)">
+							<ion-item>
+								<h2>{{item.Suplier.FullName}}</h2>
+								<label>เลขที่ :{{item.DocNo}}</label>
+								<img src="images/{{item.Suplier.IMG}}" style="width:30%" align="right">
+							</ion-item>
+						</ion-card>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+	</ion-card>
 </ion-content>
