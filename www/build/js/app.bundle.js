@@ -34,7 +34,6 @@ var MyApp = (function () {
 }());
 exports.MyApp = MyApp;
 ionic_angular_1.ionicBootstrap(MyApp);
-
 },{"./pages/home/home":3,"@angular/core":158,"ionic-angular":472,"ionic-native":499}],2:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -199,7 +198,6 @@ var PopoverPage = (function () {
     ], PopoverPage);
     return PopoverPage;
 }());
-
 },{"@angular/core":158,"@angular/http":285,"ionic-angular":472,"rxjs/add/operator/map":585}],3:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -242,7 +240,6 @@ var HomePage = (function () {
     return HomePage;
 }());
 exports.HomePage = HomePage;
-
 },{"../order/order":4,"../paid-voucher/paid-voucher":6,"../tax-invoice/tax-invoice":9,"../trading/trading":10,"@angular/core":158,"ionic-angular":472}],4:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -292,7 +289,6 @@ var OrderPage = (function () {
     return OrderPage;
 }());
 exports.OrderPage = OrderPage;
-
 },{"../product-page/product-page":7,"@angular/core":158,"ionic-angular":472}],5:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -385,7 +381,6 @@ var PaidVoucherOrderPage = (function () {
     return PaidVoucherOrderPage;
 }());
 exports.PaidVoucherOrderPage = PaidVoucherOrderPage;
-
 },{"@angular/core":158,"@angular/http":285,"ionic-angular":472,"rxjs/add/operator/map":585}],6:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -434,7 +429,6 @@ var PaidVoucherPage = (function () {
     return PaidVoucherPage;
 }());
 exports.PaidVoucherPage = PaidVoucherPage;
-
 },{"../paid-voucher-order/paid-voucher-order":5,"@angular/core":158,"@angular/http":285,"ionic-angular":472,"rxjs/add/operator/map":585}],7:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -476,7 +470,6 @@ var ProductPagePage = (function () {
     return ProductPagePage;
 }());
 exports.ProductPagePage = ProductPagePage;
-
 },{"@angular/core":158,"ionic-angular":472}],8:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -564,7 +557,6 @@ var TaxInvoiceOrderPage = (function () {
     return TaxInvoiceOrderPage;
 }());
 exports.TaxInvoiceOrderPage = TaxInvoiceOrderPage;
-
 },{"@angular/core":158,"@angular/http":285,"ionic-angular":472,"rxjs/add/operator/map":585}],9:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -606,7 +598,6 @@ var TaxInvoicePage = (function () {
     return TaxInvoicePage;
 }());
 exports.TaxInvoicePage = TaxInvoicePage;
-
 },{"../tax-invoice-order/tax-invoice-order":8,"@angular/core":158,"@angular/http":285,"ionic-angular":472,"rxjs/add/operator/map":585}],10:[function(require,module,exports){
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -652,7 +643,6 @@ var TradingPage = (function () {
     return TradingPage;
 }());
 exports.TradingPage = TradingPage;
-
 },{"../buy-product/buy-product":2,"@angular/core":158,"ionic-angular":472}],11:[function(require,module,exports){
 /**
  * @license
