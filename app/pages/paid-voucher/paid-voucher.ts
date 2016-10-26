@@ -4,12 +4,6 @@ import { PaidVoucherOrderPage } from '../paid-voucher-order/paid-voucher-order';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the PaidVoucherPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   templateUrl: 'build/pages/paid-voucher/paid-voucher.html',
 })
@@ -23,10 +17,7 @@ export class PaidVoucherPage {
 
     }).subscribe(data => {
       this.paidvoucher = data;
-      console.dir(data);
-      
     });
-    // console.log( this.paidvoucher.Products);
   }
 
   openPVO(item){
