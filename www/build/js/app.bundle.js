@@ -556,10 +556,11 @@ var ionic_angular_1 = require('ionic-angular');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var TaxInvoiceOrderPage = (function () {
-    function TaxInvoiceOrderPage(navCtrl, navParams, http) {
+    function TaxInvoiceOrderPage(navCtrl, navParams, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
+        this.alertCtrl = alertCtrl;
         this.product = [];
         this.fillterCate = [];
         this.boxcate = [];
@@ -640,13 +641,67 @@ var TaxInvoiceOrderPage = (function () {
         return result;
     };
     TaxInvoiceOrderPage.prototype.cancelPage = function () {
-        this.navCtrl.pop();
+        var _this = this;
+        var confirm = this.alertCtrl.create({
+            title: 'ยืนยันการยกเลิกสินค้า',
+            message: "\u0E04\u0E38\u0E13\u0E15\u0E49\u0E2D\u0E07\u0E01\u0E32\u0E23\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E43\u0E0A\u0E48\u0E2B\u0E23\u0E37\u0E2D\u0E44\u0E21\u0E48",
+            buttons: [
+                {
+                    text: 'ยกเลิก',
+                    handler: function () {
+                    }
+                },
+                {
+                    text: 'ตกลง',
+                    handler: function () {
+                        _this.navCtrl.pop();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    };
+    TaxInvoiceOrderPage.prototype.deleteItem = function (item) {
+        for (var i = 0; i < this.selectbasket.length; i++) {
+            if (this.selectbasket[i]._id == item._id) {
+                this.selectbasket.splice(i, 1);
+                break;
+            }
+        }
+        this.updateTotalPrice();
+    };
+    TaxInvoiceOrderPage.prototype.saveOrder = function () {
+        var _this = this;
+        var dateNow = new Date().toLocaleDateString();
+        var params = {
+            "DocNo": "99999",
+            "DocDate": dateNow,
+            "PoRef": "99999",
+            "Total": this.totalPrice * 1.07,
+            "VatTotal": this.totalPrice * 0.07,
+            "WHTTotal": 100,
+            "Amount": 1,
+            "CreditDay": dateNow,
+            "DrillDate": dateNow,
+            "BillDate": dateNow,
+            "ReceiptNo": "99999",
+            "ReceiptDate": dateNow,
+            "ReceiptStated": "money",
+            "ReceiptRefNo": "99999",
+            "Product": this.selectbasket,
+            "Customer": this.taxInvoiceDetail.Customer
+        };
+        this.http.post('https://pms-service.herokuapp.com/taxinvoiceorder', params).map(function (res) {
+            return res.json();
+        }).subscribe(function (data) {
+            _this.navCtrl.pop();
+        });
     };
     TaxInvoiceOrderPage = __decorate([
         core_1.Component({
             templateUrl: 'build/pages/tax-invoice-order/tax-invoice-order.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, http_1.Http])
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, http_1.Http, ionic_angular_1.AlertController])
     ], TaxInvoiceOrderPage);
     return TaxInvoiceOrderPage;
 }());

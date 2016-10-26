@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,7 @@ export class TaxInvoiceOrderPage {
   box: any = [];
   totalPrice: any = 0;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.taxInvoiceDetail = navParams.get('taxInvoiceDetail');
     this.product = this.taxInvoiceDetail;
     this.chooseCate('สินค้า');
@@ -93,7 +93,63 @@ export class TaxInvoiceOrderPage {
   }
 
   cancelPage() {
-    this.navCtrl.pop();
+    let confirm = this.alertCtrl.create({
+      title: 'ยืนยันการยกเลิกสินค้า',
+      message: `คุณต้องการยกเลิกสินค้าใช่หรือไม่`,
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  deleteItem(item) {
+    for (let i = 0; i < this.selectbasket.length; i++) {
+      if (this.selectbasket[i]._id == item._id) {
+        this.selectbasket.splice(i, 1);
+        break;
+      }
+    }
+    this.updateTotalPrice();
+  }
+
+  saveOrder() {
+    let dateNow = new Date().toLocaleDateString();
+    let params = {
+      "DocNo": "99999",
+      "DocDate": dateNow,
+      "PoRef": "99999",
+      "Total": this.totalPrice * 1.07,
+      "VatTotal": this.totalPrice * 0.07,
+      "WHTTotal": 100,
+      "Amount": 1,
+      "CreditDay": dateNow,
+      "DrillDate": dateNow,
+      "BillDate": dateNow,
+      "ReceiptNo": "99999",
+      "ReceiptDate": dateNow,
+      "ReceiptStated": "money",
+      "ReceiptRefNo": "99999",
+      "Product": this.selectbasket,
+      "Customer": this.taxInvoiceDetail.Customer
+    }
+
+    this.http.post('https://pms-service.herokuapp.com/taxinvoiceorder', params).map(res => {
+      return res.json();
+    }).subscribe(data => {
+      this.navCtrl.pop();
+    });
   }
 }
 
