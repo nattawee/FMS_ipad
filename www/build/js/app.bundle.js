@@ -485,6 +485,7 @@ var PaidVoucherPage = (function () {
         });
     }
     PaidVoucherPage.prototype.openPVO = function (item) {
+        console.log("openPVO");
         this.navCtrl.push(paid_voucher_order_1.PaidVoucherOrderPage, { "paidvoucherdetail": item });
     };
     PaidVoucherPage = __decorate([

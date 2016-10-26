@@ -13,7 +13,7 @@
 			<ion-col width-50>
 				<ion-card style="height:560px !important;max-height:560px !important">
 					<ion-col>
-						<ion-row style="height: 100%; padding: 0; flex-wrap: wrap;">
+						<ion-row style="padding: 0; flex-wrap: wrap;">
 							<ion-col style="flex: 0 0 70%; max-width: 70%; text-align: center; padding: 0px;">
 								<div style="text-align: left;"> ชื่อลูกค้า : {{paidvoucherdetail.Suplier.FullName}}
 									<div style="text-align: left;">{{paidvoucherdetail.Suplier.Address}}</div>
@@ -23,7 +23,7 @@
 							</ion-col>
 							<ion-col style="flex: 0 0 30%; max-width: 30%; text-align: center; padding: 0px;">
 								<div style="text-align: left;">เลขที่ :{{paidvoucherdetail.DocNo}}</div>
-								<div style="text-align: left;">วันที่ :{{paidvoucherdetail.DocDate | date :"dd/MM/yyyy"}}</div>
+								<div style="text-align: left;">วันที่ :{{paidvoucherdetail.DocDate | date:"dd/MM/yyyy"}}</div>
 							</ion-col>
 						</ion-row>
 					</ion-col>
@@ -77,7 +77,7 @@
 												รวมเงิน
 											</ion-col>
 											<ion-col>
-												฿ {{totalPrice | number}}
+												฿ {{totalPrice}}
 											</ion-col>
 										</ion-row>
 									</ion-col>
@@ -89,7 +89,7 @@
 												VAT (7.0%)
 											</ion-col>
 											<ion-col>
-												฿ {{totalPrice * 0.07 | number}}
+												฿ {{totalPrice * 0.07}}
 											</ion-col>
 										</ion-row>
 									</ion-col>
@@ -101,7 +101,7 @@
 												รวมเงินสุทธิ
 											</ion-col>
 											<ion-col>
-												฿ {{totalPrice * 1.07 | number}}
+												฿ {{totalPrice * 1.07}}
 											</ion-col>
 										</ion-row>
 									</ion-col>

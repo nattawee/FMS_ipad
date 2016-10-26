@@ -21,6 +21,7 @@ export class PaidVoucherPage {
   }
 
   openPVO(item){
+    console.log("openPVO");
     this.navCtrl.push(PaidVoucherOrderPage, { "paidvoucherdetail": item });
   }
 
